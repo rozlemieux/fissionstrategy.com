@@ -28,7 +28,7 @@
         $latest_blog->date = date('F j', strtotime($latest_blog->date));
       ?>
       <small class="date sidebar_blog_date">posted by <?php echo $latest_blog->author ?> on <?php echo $latest_blog->date ?></small>
-      <a class="more" href="/blog/post/<?php echo $latest_blog->name ?>/">more from the blog</a>
+      <a class="more" href="/blog/">more from the blog</a>
 
     </div>
 

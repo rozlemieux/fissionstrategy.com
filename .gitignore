@@ -1,0 +1,6 @@
+uploads/.thumbs
+uploads/files
+uploads/images
+exports
+_assets
+application/config/database.php
