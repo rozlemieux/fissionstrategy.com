@@ -1,7 +1,10 @@
+application/config/config.php
+application/config/database.php
 uploads/.thumbs
 uploads/files
 uploads/images
 exports
 _assets
-application/config/database.php
 application/modules/CMS/controllers/importing
+application/views/includes/fs.twitter.json.cache
+*~

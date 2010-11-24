@@ -11,8 +11,8 @@
 |	http://example.com/
 |
 */
-$config['base_url']	= "http://dev.fissionstrategy.com/";
-$config['base_dir']     = "/var/www/html/fissionstrategy.com/";
+$config['base_url']	= "http://fissionstrategy:8888/";
+$config['base_dir']     = "/users/cindymottershead/WebRoot/FissionStrategy/fissionstrategy.com/";
 $config['site_name']	= "Fission Strategy";
 
 /*
