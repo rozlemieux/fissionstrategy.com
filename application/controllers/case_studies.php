@@ -8,10 +8,15 @@ class Case_studies extends Site {
                 parent::Controller();
         }
 
+        function index() {
+                $this->page();
+        }
+
         //
         // Case Study/Project index page - lists 15 per page for the given category
         // 
-        function index($page = 0, $category = 0) {
+
+        function page($page = 0, $category = 0) {
                 // get case studies
                 $this->load->module_model('CMS', 'case_study_model');
                 $this->data = array();
