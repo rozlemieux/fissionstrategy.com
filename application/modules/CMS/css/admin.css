@@ -1,0 +1,383 @@
+a {
+	color: #3399ff;
+}
+
+.breadcrumbs {
+	font-family: rockwell, "Rockwell", Arial, Helvetica, "Helvetica", sans-serif;
+	font-size: 15px;
+	color: #333;
+	line-height: 21px;
+	margin-bottom: 10px;
+        margin-top: 30px;
+}
+
+.navigation {
+    padding-top: 20px;
+}
+
+.navigation h4 {
+    color: white; 
+    margin-left: 4px;
+}
+
+.wrapper {
+    margin: 0 auto;
+    padding-left: 5px;
+    width: 988px;
+}
+
+.header { 
+    padding: 20px 0;
+    margin-bottom: 10px;
+}
+
+.header .logo {
+    margin: 0;
+}
+
+.header #logout {
+    float: right;
+}
+
+h1 { 
+    font-size: 24px; 
+    font-weight: bold;
+    padding: 10px 0px;
+}
+
+.main { 
+    color: black;
+    padding: 10px 0 0 6px;
+}
+
+#welcome {
+    float: left; 
+    padding-top: 6px;
+}
+
+#welcome a {
+    color: white;
+}
+
+form input.submit, form input.submit, .create_button {
+    color: white;
+    background-color:#333;	
+    box-shadow: 0 1px 0 gray;
+    -moz-box-shadow: 0 1px 0 gray;
+    -webkit-box-shadow: 0 1px 0 gray;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    float: right;
+    padding: 6px 10px;
+    font-size: 16px;
+    margin: 0px 145px 20px 0px;
+    cursor: pointer;
+}
+
+.create_button a:visited {
+    text-decoration: none;
+}
+
+.create_button a {
+    color: white;
+}
+
+#create_cms_user {
+    -moz-border-radius:5px 5px 5px 5px;
+    background-color: #e5e5e5;
+    clear:left; 
+    width: 600px;
+    padding: 20px 0 20px 30px;
+    float: left;
+    margin-bottom: 10px;
+}
+
+#create_cms_user label {
+    width: 180px;
+}
+
+#create_cms_user form {
+    padding: 30px;
+}
+
+#create_cms_user label, #create_cms_user input {
+    margin-top: 20px;
+}
+
+#admin_edit {
+    clear:both;
+    margin-top: 20px;
+}
+
+#admin_title {
+    -moz-border-radius:5px 5px 5px 5px;
+    background-color: #e5e5e5;
+    display:block;
+    float: left;
+    width: 640px;
+    padding: 4px 10px;
+    margin-left: 8px;
+}
+
+#textarea_edit {
+    display:block;
+    float: left;
+    width: 640px;
+    padding: 0px 10px;
+    margin-left: 8px;
+}
+
+#admin_title input {
+    width: 500px;
+}
+
+.sidebar { 
+    -moz-border-radius:5px 5px 5px 5px;
+    width: 280px;
+}
+
+#photo_upload {
+    margin-bottom: 20px;
+}
+
+#blog_photo img {
+    margin: 10px;
+    padding: 10px;
+    background-color: white;
+}
+
+#photo_upload input {
+    font-size: 12px;
+}
+
+label {
+    display: block;
+    padding-right: 20px;
+    text-align: left;
+    float: left;
+    clear: both;
+}
+
+form label {
+    padding-top: 0px;
+}
+
+form input {
+    clear: none;
+    height: auto;
+}
+
+.flexigrid {
+    clear: both;
+    line-height: 10px;
+}
+
+.ftitle {
+    display: none;
+    background-color: inherit;
+    font-size: 16px;
+    color: white;
+    border: 1px solid #333;	
+}
+
+.flexigrid div.mDiv {
+    background-image: none;
+    border: none;
+}
+
+.flexigrid div.pDiv, .flexigrid div.hDiv {
+    background-image: none;
+    background-color: #e5e5e5;
+    border: none;
+}
+
+.flexigrid div.hDiv th.sorted {
+    background-image: none;
+    background-color: #333;	
+    color: white;
+}
+
+.flexigrid tr.trSelected td.sorted a, .flexigrid tr.trSelected td a {
+    color: inherit;
+}
+
+.flexigrid div.hDiv th, .flexigrid div.bDiv td {
+    border-left: 1px solid #c9a478;
+    border-right: 1px solid #c9a478;
+}
+
+.flexigrid div.sDiv{
+    background: none;
+    background-color: #333;
+    color: white;
+    display: block;
+    float: right;
+}
+
+.flexigrid div.fbutton .export {
+    background: url(/img/export.png) no-repeat left center;
+}
+
+.flexigrid div.sDiv2 {
+    float: right;
+    width: 500px;
+}
+
+.flexigrid div.tDiv {
+    background: none;
+    background-color: #333;
+    color: white;
+}
+
+.flexigrid div.tDiv2 {
+    width: 100%;
+}
+
+.flexigrid div.hDiv th:hover {
+    color:white;
+    background-color: #333;	
+    cursor: pointer;
+}
+
+.flexigrid div.vGrip {
+    color: white;
+    background-image: none;
+    background-color: #333;
+    border: none;
+}
+
+.validation_errors {
+    display: none;
+    -moz-border-radius:5px 5px 5px 5px;
+    clear: both;
+    color: red;
+    width: 600px;
+    padding: 20px 0 20px 30px;
+}
+
+#login_form {
+        background-color: #e5e5e5;
+	width: 400px;
+        height: 240px;
+	border: 1px solid #1f4104;
+	margin: 150px auto 200px;
+	padding: 1em;
+	-moz-border-radius: 3px;
+}
+
+#login_form form {
+    background-color: #1f4104;
+}
+
+#login_form input[type=text], input[type=password] {
+	display: block;
+	margin: 0 0 1em 0;
+	width: 280px;
+	border: 5px;
+	-moz-border-radius: 1px;
+	-webkit-border-radius: 1px;
+	padding: 1em;
+}
+
+#login_form input[type=submit]:hover  {
+	cursor: pointer;
+}
+
+.sidebar .status {
+        margin-top: 10px;
+        margin-right: 20px;
+}
+
+.sidebar .status select {
+    margin-left: 40px;
+}
+
+
+#edit_template {
+    float: left;
+    margin: 0px 10px;
+    width: 640px;
+    clear:left; 
+}
+
+#admin_edit textarea {
+    width: 660px;
+    height: 500px;
+}
+
+.sidebar .cms_blue {
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    background-color: #e5e5e5 !important;
+    padding: 15px;
+    width: 100%;
+    float: left;
+}
+
+.blogdate {
+    margin: 10px 0px;
+}
+
+.sidebar input {
+    font-size: 11px;
+    width: auto;
+}
+
+.greenish {
+    color: #b6e277;
+}
+
+.sidebar .clear {
+    padding-bottom:15px;
+    border-bottom: solid 2px #999;
+    clear: both;
+}
+
+.sidebar .clear_only {
+    clear: both;
+}
+
+.blogdate {
+    margin-bottom: 30px;
+}
+
+.grid_edit {
+    font-weight: bold;
+}
+
+.clear_left {
+    clear: left;
+}
+
+#blogger_info {
+    clear:left; 
+    width: 700px;
+    margin-top:10px;
+}
+
+.blogger_form {
+    clear: left;
+    float: left;
+    width: 200px;
+    padding: 4px 0;
+    line-height: 20px;
+}
+
+#blogger_info input {
+    padding: 3px 0;
+}
+
+#blogger_info .gray {
+    background-color: #E7E7E7;
+}
+
+#admin_edit .quote_textarea {
+    clear: left;
+    height: 100px;
+    width: 325px;
+    border: none;
+    padding: 20px;
+    background-color: #E7E7E7;
+    margin: 0 10px;
+}
+

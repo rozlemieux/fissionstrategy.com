@@ -1,0 +1,12 @@
+* html body {
+	behavior: url(styles/csshover.htc);
+}
+
+div {
+	zoom: 1;	
+}
+
+.map .project {
+	background: none;
+	filter: progid:DXImageTransform.Microsoft.AlphaImageLoader (src='images/icon-project.png', sizingMethod='scale');
+}

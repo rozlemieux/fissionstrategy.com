@@ -1,0 +1,15 @@
+
+CSSTIDY csstidy.sourceforge.net/
+
+JSMIN–PHP code.google.com/p/jsmin-php/
+
+
+CUSTOM HTML LIBRARY function 
+
+link_js ( $file ) { 
+  $cached_js_file = $this -> cached_dir_js. $file ; 
+  if (! file_exists ( $cached_js_file )) { $js_file = $this -> dir_js. $file ; 
+    file_put_contents ( $cached_js_file , JSMin :: minify ( file_get_contents ( $js_file )); 
+  } 
+  return sprintf ( $this -> js_tag , $cached_js_file . '_' . $this -> version. '.js' ); 
+}

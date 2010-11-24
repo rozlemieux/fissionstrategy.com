@@ -1,0 +1,74 @@
+.calendar {
+	border: 1px #6975A3 solid;
+	background-color: transparent;
+}
+.calheading {
+	background-color: #7fc41c;
+	font-family: Lucida Grande, Verdana, Geneva, Sans-serif;
+	font-size: 11px;
+	font-weight: bold;
+	text-align: center;
+}
+.calnavleft {
+	background-color: #7fc41c;
+	font-family: Lucida Grande, Verdana, Geneva, Sans-serif;
+	font-size: 10px;
+	font-weight: bold;
+	padding: 4px;
+	cursor: pointer;
+}
+.calnavright {
+	background-color: #7fc41c;
+	font-family: Lucida Grande, Verdana, Geneva, Sans-serif;
+	font-size: 10px;
+	font-weight: bold;
+	text-align:  right;
+	padding: 4px;
+	cursor: pointer;
+}
+.caldayheading {
+	background-color: #000;
+	color: #fff;
+	font-family: Lucida Grande, Verdana, Geneva, Sans-serif;
+	font-size: 10px;
+	text-align: center;
+	padding: 6px 2px 6px 2px;
+}
+.caldaycells{
+	color: #000;
+	background-color: #7fc41c;
+	font-family: Lucida Grande, Verdana, Geneva, Sans-serif;
+	font-size: 11px;
+	text-align: center;
+	padding: 4px 8px;
+	border: 1px #E0E5F1 solid;
+	cursor: pointer;
+}
+.caldaycellhover{
+	color: #fff;
+	background-color: #b6e277;
+	font-family: Lucida Grande, Verdana, Geneva, Sans-serif;
+	font-size: 11px;
+	text-align: center;
+	padding: 4px;
+	border: 1px #B3BCD4 solid;
+	cursor: pointer;
+}
+.caldayselected{
+	background-color: #b6e277;
+	font-family: Lucida Grande, Verdana, Geneva, Sans-serif;
+	font-size: 11px;
+	font-weight: bold;
+	text-align: center;
+	border: 1px #566188 solid;
+	padding: 3px;
+	cursor: pointer;
+}
+.calblanktop {
+	background-color: #fff;
+	padding: 4px;
+}
+.calblankbot {
+	background-color: #fff;
+	padding: 4px;
+}
