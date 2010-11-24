@@ -11,8 +11,8 @@
 |	http://example.com/
 |
 */
-$config['base_url']	= "http://fissionstrategy:8888/";
-$config['base_dir']     = "/Users/cindymottershead/WebRoot/FissionStrategy/fissionstrategy/";
+$config['base_url']	= "http://dev.fissionstrategy.com/";
+$config['base_dir']     = "/var/www/html/fissionstrategy.com/";
 $config['site_name']	= "Fission Strategy";
 
 /*
@@ -174,7 +174,7 @@ $config['directory_trigger'] 	= 'd'; // experimental not currently in use
 | your log files will fill up very fast.
 |
 */
-$config['log_threshold'] = 2;
+$config['log_threshold'] = 4;
 
 /*
 |--------------------------------------------------------------------------

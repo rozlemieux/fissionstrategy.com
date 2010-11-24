@@ -4,3 +4,4 @@ uploads/images
 exports
 _assets
 application/config/database.php
+application/modules/CMS/controllers/importing
