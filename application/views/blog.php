@@ -12,13 +12,13 @@
 
     ?>
     <div class="blog-preview">
-      <a class="thumb" href="/blog/post/<?php echo $blog->name?>/">
+      <a class="thumb" href="/blog/<?php echo $blog->name?>/">
         <img width="200px" alt="" src="/uploads/images/Blog/<?php echo $blog->thumb; ?>" /></a>
-      <h3><a href="/blog/post/<?php echo $blog->name?>/"><?php echo $blog->title ?></a></h3>
+      <h3><a href="/blog/<?php echo $blog->name?>/"><?php echo $blog->title ?></a></h3>
       <small class="date">posted by <?php echo $blog->author ?> on <?php echo $date ?></small>
       <?php 
       $content = strip_tags($blog->content);
-      $content = myTruncate($content, 350, ' ', "&nbsp;<a href=\"/blog/post/{$blog->name}\">[...]</a>");
+      $content = myTruncate($content, 350, ' ', "&nbsp;<a href=\"/blog/{$blog->name}\">[...]</a>");
       echo $content;
       ?>
     </div>

@@ -12,6 +12,21 @@ class blog extends Site {
                 $this->page();
         }
 
+        // 
+        // use remap to control the url to be backward compatible with the wordpress site
+        //  this remaps /blog/post/blog-name to /blog/blog-name
+        //
+        function _remap($method) {
+                if ($method == 'index') {
+                        $this->$method();
+                }
+                else  if ($method == 'page') {
+                        $this->page($this->uri->segment(3));
+                }
+                else  
+                        $this->post($method);
+        }
+
         //
         // Blog index page - lists 15 per page
         // 
