@@ -25,7 +25,7 @@
 
   </div>
 </div>
-<!--
+
 <script type="text/javascript">
 
   var _gaq = _gaq || [];
@@ -39,6 +39,6 @@
     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
   })();
 
-</script> -->
+</script>
 </body>
 </html>

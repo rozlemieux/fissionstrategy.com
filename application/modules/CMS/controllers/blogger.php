@@ -112,7 +112,7 @@ class Blogger extends CMS {
                 // create a temp export file of this data
                 if ($this->input->post('export')) {
 
-                        $contents = '"rowid", "id","Source", "Edit", "URL","Email","Email_2","First_Name","Last_Name","City","State","Phone","Skype","Fax","Web_Form_URL","Authority," "Twitter_Blogger","Twitter_Blogger_Followers","Twitter_Outlet","Twitter_Outlet_Followers","Facebook," "Notes","Estimated_Readership","Additional_Contact","end"' . "\n";
+                        $contents = 'rowid, id,Source, Edit, URL,Email,Email_2,First_Name,Last_Name,City,State,Phone,Skype,Fax,Web_Form_URL,Authority, Twitter_Blogger,Twitter_Blogger_Followers,Twitter_Outlet,Twitter_Outlet_Followers,Facebook, Notes,Estimated_Readership,Additional_Contact,end' . "\n";
 
                         $this->export($contents, $record_items);
                         return;

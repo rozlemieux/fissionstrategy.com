@@ -23,7 +23,7 @@
           <img src="/img/icon-rss.gif" alt="" />
         </a>
       </h2>
-      <h3 class="fission"><a href="/blog/post/<?php echo $latest_blog->name ?>/"><?php echo $latest_blog->title ?></a></h3>
+      <h3 class="fission"><a href="/blog/<?php echo $latest_blog->name ?>/"><?php echo $latest_blog->title ?></a></h3>
       <?php
         $latest_blog->date = date('F j', strtotime($latest_blog->date));
       ?>

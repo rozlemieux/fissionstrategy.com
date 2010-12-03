@@ -27,7 +27,7 @@ class Contact extends Site {
   
                 $this->email->from($_POST['email']);
 
-                $sendto = 'cindy.mottershead@gmail.com';
+                $sendto = 'cindy.mottershead@gmail.com, info@fissionstrategy.com';
 
                 $this->email->to($sendto); 
                 $this->email->subject('Fission Strategy: Received a Contact Us');

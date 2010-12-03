@@ -2,7 +2,7 @@
 
 require_once 'cms.php';
 
-class Templates extends Controller {
+class Templates extends CMS {
 
         function __construct() {
                 parent::__construct();

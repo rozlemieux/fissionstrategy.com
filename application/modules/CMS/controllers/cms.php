@@ -45,10 +45,10 @@ class CMS extends Controller {
                 foreach ($record_items as $item) {
                         foreach ($item as $value) {
                                 if ($value)
-                                        $value = str_replace('"', "'", $value);
-                                $contents .= '"' . $value . '",';
+                                    $contents .= str_replace(',', ";", $value);
+                                $contents .= ',';
                         }
-                        $contents .= '""' . "\n";
+                        $contents .= "\n";
                 }
                 file_put_contents($filename, $contents);
 

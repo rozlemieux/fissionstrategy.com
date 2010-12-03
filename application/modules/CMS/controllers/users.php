@@ -18,15 +18,6 @@ class Users extends CMS {
                 $this->load->view('includes/template', $data);		
         }
 
-        // security check
-        //
-        function is_logged_in() {
-                $is_logged_in = $this->session->userdata('is_logged_in');
-                if(!isset($is_logged_in) || $is_logged_in != true) {
-                        redirect('/CMS/login');
-                }		
-        }
-
         // responds to clicking the edit column on a row in the grid
         // 
         function edit_user($id) {
@@ -89,7 +80,7 @@ class Users extends CMS {
                 if (isset($_POST['create_user'])) 
                         $this->form_validation->set_rules('username', 'Username', 'callback_username_check');
                 else 
-                        $this->form_validation->set_rules('username', 'Username', 'trim|required|min_length[4]');
+                        $this->form_validation->set_rules('username', 'Username', 'trim|required|min_length[3]');
 
                 if ($_POST['password']) {
                         $this->form_validation->set_rules('password', 'Password', 'trim|required|min_length[4]|max_length[32]');
