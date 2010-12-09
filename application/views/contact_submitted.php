@@ -1,4 +1,5 @@
-<div class="content">
+<div class="main">
+  <div class="content">
 
   <div id="contact_form">
     <br>

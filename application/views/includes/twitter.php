@@ -21,7 +21,7 @@ function twitterify($ret) {
 }
 
 function file_age( $file ) {
-    return 908;
+
     if( !file_exists($file) )
         return 99999999;
 				        
