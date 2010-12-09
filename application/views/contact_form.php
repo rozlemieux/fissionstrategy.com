@@ -28,3 +28,30 @@
 
     </div>
   </div>
+
+<script>
+jQuery(document).ready(function() { 
+
+    $('#submit').click(function() {
+
+	if ($('#name').val() == '') {
+	  alert("please enter a name");
+	  return false ;
+	}
+
+	if ($('#email').val() == '') {
+          alert("Please enter a valid Email Address.");
+	  return false;
+	}
+
+	if ($('#message').val() == '') {
+	  alert("please enter a message");
+	  return false ;
+	}
+
+        return true;
+    });
+
+});
+
+</script>
