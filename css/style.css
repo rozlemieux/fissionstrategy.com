@@ -1157,3 +1157,8 @@ table.calendar {
 #contact_form input {
         margin: 10px 0;
 }
+
+.header #logout {
+    float: right;
+}
+

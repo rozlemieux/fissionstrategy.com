@@ -44,6 +44,19 @@ class Team extends CMS {
                 $this->_edit_team_member($team_member, $id, "Editing team member: " . $team_member->name);
         }
 
+        // responds to clicking the delete button when a row or rows are selected in the grid
+        // 
+        function delete() {
+		$ids = explode(',', $_POST['items']);
+
+		foreach ($ids as $i => $id) {
+		  if ($id) {
+		    $tean = new team_model($id);
+		    $tean->delete();
+		  }
+		}
+        }
+
         // ajax call from flexigrid to populate rows
         //
         function ajax_load_team_members() {
@@ -100,7 +113,7 @@ class Team extends CMS {
 		
                 $gridParams = array(
                         'width' => 'auto',
-                        'height' => 420,
+                        'height' => 620,
                         'rp' => 20,
                         'rpOptions' => '[15,20]',
                         'pagestat' => 'Displaying: {from} to {to} of {total} items.',
@@ -109,8 +122,11 @@ class Team extends CMS {
                         'showTableToggleBtn' => false
                 );
 		
+                $buttons[] = array('Select All','select all','grid_functions');
+                $buttons[] = array('DeSelect All','deselect all','grid_functions');
+                $buttons[] = array('Delete','delete','grid_functions');
                 $buttons[] = array('Export','export','grid_functions');
-                $grid_js = build_grid_js('Grid',site_url("CMS/team/ajax_load_team_members"),$colModel,'date','desc',$gridParams, $buttons);
+                $grid_js = build_grid_js('Grid',site_url("CMS/team/ajax_load_team_members"),$colModel,'id','asc',$gridParams, $buttons);
         
                 return $grid_js;
         }
@@ -152,7 +168,7 @@ class Team extends CMS {
                 if ( ! $this->upload->do_upload()) {
                         $error = array('error' => $this->upload->display_errors());
                         //            $this->load->view('upload_form', $error);
-                        //echo "ERROR" . print_r($error, 1);
+                        echo "ERROR" . print_r($error, 1);
                 }	
                 else {
                         $uploaded = $this->upload->data();

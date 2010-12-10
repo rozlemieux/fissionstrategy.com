@@ -48,6 +48,15 @@ class Membership_model extends Model {
                 if ($query->num_rows > 0)
                         return true;
         }
+
+        // delete this page from the database
+        // 
+        function delete($id) {
+                echo "here in delete $id";
+                echo $this->db->delete('fs_membership', array('id' => $id));
+                echo "here AFTEER in delete $id";
+        }
+
         
         // create a new user and save to the database
         //

@@ -50,6 +50,19 @@ class Blog extends CMS {
                 $this->_edit_blog($blog, $id, "Editing Blog: " . $blog->title);
         }
 
+        // responds to clicking the delete button when a row or rows are selected in the grid
+        // 
+        function delete() {
+		$ids = explode(',', $_POST['items']);
+
+		foreach ($ids as $i => $id) {
+		  if ($id) {
+		    $blog = new Blog_model($id);
+		    $blog->delete();
+		  }
+		}
+        }
+
         // ajax call from flexigrid to populate rows
         //
         function ajax_get_blog() {
@@ -109,7 +122,7 @@ class Blog extends CMS {
 		
                 $gridParams = array(
                         'width' => 'auto',
-                        'height' => 420,
+                        'height' => 620,
                         'rp' => 40,
                         'rpOptions' => '[40,200]',
                         'pagestat' => 'Displaying: {from} to {to} of {total} items.',
@@ -118,6 +131,9 @@ class Blog extends CMS {
                         'showTableToggleBtn' => false
                 );
 		
+                $buttons[] = array('Select All','select all','grid_functions');
+                $buttons[] = array('DeSelect All','deselect all','grid_functions');
+                $buttons[] = array('Delete','delete','grid_functions');
                 $buttons[] = array('Export','export','grid_functions');
                 $grid_js = build_grid_js('Grid',site_url("CMS/blog/ajax_get_blog"),$colModel,'date','desc',$gridParams, $buttons);
         

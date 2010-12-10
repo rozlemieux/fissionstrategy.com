@@ -98,9 +98,9 @@ function grid_functions(com, grid) {
     }
     
     if (com=='Delete')     {
+
         if ($('.trSelected',grid).length > 0) {
             if (confirm('Delete ' + $('.trSelected',grid).length + ' items?')) {
-                /*
                 var items = $('.trSelected',grid);
                 var itemlist ='';
                 for(i=0;i<items.length;i++){
@@ -108,14 +108,12 @@ function grid_functions(com, grid) {
                 }
                 $.ajax({
                     type: "POST",
-                            url: "<?php echo site_url("/ajax/deletec");?>",
+                            url: location.href + "/delete",
                             data: "items="+itemlist,
                             success: function(data){
                             $('#Grid').flexReload();
-                            alert(data);
                         }
                     });
-                */
             }
         } else {
             return false;
