@@ -81,7 +81,7 @@ class Case_study extends CMS {
                 foreach ($records['records']->result() as $row)	{
                         $record_items[] = array($row->id,
                                           $row->id,
-                                          "<img width='50' src='/uploads/images/CaseStudies/$row->image' />",
+                                          "<img width='50' src='/uploads/images/CaseStudies/{$row->image}.sm.jpg' />",
                                           $row->status,
                                           '<a class="grid_edit" title="Edit" href="/CMS/case_study/edit/' . $row->id . '">' . $row->title . '</a>',
                                           $row->quote,
