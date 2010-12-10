@@ -65,6 +65,18 @@ class Blogger extends CMS {
                 $this->_edit_blogger($blogger, $id, "Editing Blogger: " . $blogger->title);
         }
 
+        // responds to clicking the delete button when a row or rows are selected in the grid
+        // 
+        function delete() {
+		$ids = explode(',', $_POST['items']);
+
+		foreach ($ids as $i => $id) {
+		  if ($id) {
+		    $blogger = new Blogger_model($id);
+		    $blogger->delete();
+		  }
+		}
+        }
 
         // ajax call from flexigrid to populate rows
         //
@@ -165,12 +177,11 @@ class Blogger extends CMS {
                 );
         
                 $buttons = array();
-                //        $buttons[] = array('Delete','delete','test');
+                //        $buttons[] = array('separator');
+                $buttons[] = array('Select All','select all','grid_functions');
+                $buttons[] = array('DeSelect All','deselect all','grid_functions');
+                $buttons[] = array('Delete','delete','grid_functions');
                 $buttons[] = array('Export','export','grid_functions');
-                //        $buttons[] = array('separator');
-                //        $buttons[] = array('Select All','add','grid_functions');
-                //        $buttons[] = array('DeSelect All','delete','grid_functions');
-                //        $buttons[] = array('separator');
 
                 $grid_js = build_grid_js('Grid',site_url("CMS/blogger/ajax_load_blogger/$cat_ids"),$colModel,'title','asc',$gridParams, $buttons);
         

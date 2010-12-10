@@ -35,10 +35,6 @@ a {
     margin: 0;
 }
 
-.header #logout {
-    float: right;
-}
-
 h1 { 
     font-size: 24px; 
     font-weight: bold;
@@ -381,3 +377,14 @@ form input {
     margin: 0 10px;
 }
 
+.flexigrid div.fbutton .delete {
+    background: url(/img/delete.png) no-repeat center left;
+}			
+
+.flexigrid div.fbutton .deselect {
+    background: url(/img/bullet_white.png) no-repeat center left;
+}			
+
+.flexigrid div.fbutton .select {
+    background: url(/img/tick.png) no-repeat center left;
+}			

@@ -43,6 +43,19 @@
 	<div class="header">
 	  <a href="/" class="logo"></a>
 
+         <?php if ( $this->session && $this->session->userdata('username')) {    ?>
+          <div id="logout">
+          Welcome back <strong><?php echo $this->session->userdata('username'); ?></strong>&nbsp;-&nbsp;
+          <?php                                                                               
+             echo anchor('/CMS/login/logout', 'Logout'); 
+             if ($this->session->userdata('id') > 9)  
+                echo '&nbsp; - <a href="/notes">notes</a>';
+             else 
+                echo '&nbsp; - <a href="/CMS">CMS</a>';
+          ?>
+          </div>                                                                               
+          <?php } ?>
+
           <?php
             if (isset($main_content)) {
                $home_active = ($main_content == 'homepage') ? " class='page_item current_page_item' " : '';

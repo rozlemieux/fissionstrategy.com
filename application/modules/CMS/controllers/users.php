@@ -18,6 +18,15 @@ class Users extends CMS {
                 $this->load->view('includes/template', $data);		
         }
 
+        // security check
+        //
+        function is_logged_in() {
+                $is_logged_in = $this->session->userdata('is_logged_in');
+                if(!isset($is_logged_in) || $is_logged_in != true) {
+                        redirect('/CMS/login');
+                }		
+        }
+
         // responds to clicking the edit column on a row in the grid
         // 
         function edit_user($id) {
@@ -38,6 +47,19 @@ class Users extends CMS {
                 $this->load->view('includes/template', $data);
         }
 
+
+        // responds to clicking the delete button when a row or rows are selected in the grid
+        // 
+        function delete() {
+		$ids = explode(',', $_POST['items']);
+                $this->load->model('membership_model');
+
+		foreach ($ids as $i => $id) {
+                        if ($id) {
+                                $this->membership_model->delete($id);
+                        }
+		}
+        }
 
         // Responds to the New user button on the dashboard page
         // 
@@ -80,7 +102,7 @@ class Users extends CMS {
                 if (isset($_POST['create_user'])) 
                         $this->form_validation->set_rules('username', 'Username', 'callback_username_check');
                 else 
-                        $this->form_validation->set_rules('username', 'Username', 'trim|required|min_length[3]');
+                        $this->form_validation->set_rules('username', 'Username', 'trim|required|min_length[4]');
 
                 if ($_POST['password']) {
                         $this->form_validation->set_rules('password', 'Password', 'trim|required|min_length[4]|max_length[32]');
@@ -190,6 +212,9 @@ class Users extends CMS {
                         'showTableToggleBtn' => false
                 );
 		
+                $buttons[] = array('Select All','select all','grid_functions');
+                $buttons[] = array('DeSelect All','deselect all','grid_functions');
+                $buttons[] = array('Delete','delete','grid_functions');
                 $buttons[] = array('Export','export','grid_functions');
                 $grid_js = build_grid_js('Grid',site_url("CMS/users/ajax_load_users"),$colModel,'username','asc',$gridParams, $buttons);
         

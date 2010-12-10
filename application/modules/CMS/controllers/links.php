@@ -50,6 +50,19 @@ class Links extends CMS {
                 $this->_edit_links($links, $id, "Editing Links: " . $links->title);
         }
 
+        // responds to clicking the delete button when a row or rows are selected in the grid
+        // 
+        function delete() {
+		$ids = explode(',', $_POST['items']);
+
+		foreach ($ids as $i => $id) {
+		  if ($id) {
+		    $link = new Links_model($id);
+		    $link->delete();
+		  }
+		}
+        }
+
         function _edit_links($links, $id, $title) {
                 $data['menu_highlight'] = "Links";
                 $data['id'] = $id;
@@ -128,6 +141,9 @@ class Links extends CMS {
                         'showTableToggleBtn' => false
                 );
 		
+                $buttons[] = array('Select All','select all','grid_functions');
+                $buttons[] = array('DeSelect All','deselect all','grid_functions');
+                $buttons[] = array('Delete','delete','grid_functions');
                 $buttons[] = array('Export','export','grid_functions');
                 $grid_js = build_grid_js('Grid',site_url("CMS/links/ajax_load_links"),$colModel,'name','asc',$gridParams, $buttons);
         
