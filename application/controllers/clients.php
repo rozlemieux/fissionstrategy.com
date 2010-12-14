@@ -4,10 +4,6 @@ require_once 'site.php';
 
 class Clients extends Site {
 
-        function __construct()    {
-                parent::Controller();
-        }
-
         // 
         // read the page contents from page_model
         // 

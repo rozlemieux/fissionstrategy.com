@@ -4,10 +4,6 @@ require_once 'site.php';
 
 class Case_studies extends Site {
 
-        function __construct()    {
-                parent::Controller();
-        }
-
         function index() {
                 $this->page();
         }
@@ -54,5 +50,4 @@ class Case_studies extends Site {
                 $this->data['main_content'] = 'case_study';
                 $this->load->view('includes/template_sidebar', $this->data);		
         }
-
 }

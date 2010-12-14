@@ -31,13 +31,15 @@ class Case_study_model extends Model {
         // get the list, or specific blog
         //    note: need to get_photos for this specific range
         //
-        function get($name = '', $limit = 99, $offset = 0, $category = 0) {
+        function get($name = '', $limit = 99, $offset = 0, $category = 0, $preview = 0) {
 
                 $photos = $this->_get_photos();
                 $tags = $this->_get_tags();
                 $case_studies = array();
                 $this->db->select('*, fs_case_study.id as id');
                 $this->db->where('status', 'publish');
+                if ($preview)
+                        $this->db->or_where('id', $preview);
                 $this->db->from(self::table_name);
                 if ($category > 1) {
                         $this->db->join('fs_map', 'fs_map.case_study_id = fs_case_study.id');
