@@ -33,7 +33,12 @@ echo "</div>";
                   'trash'   => 'Trash',
                 );
       echo form_dropdown('status', $options, $case_study->status);
+
+      if ($case_study->id)
+              echo "<br /><a href=\"/projects/preview/{$case_study->id}\">preview</a>";
+
       ?>
+
     </div>
 
     <div class="status clear">

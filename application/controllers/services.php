@@ -4,10 +4,6 @@ require_once 'site.php';
 
 class Services extends Site {
 
-        function __construct()    {
-                parent::Controller();
-        }
-
         // 
         // get the contents of the services pag form the page_model
         // 

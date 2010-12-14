@@ -4,10 +4,6 @@ require_once 'site.php';
 
 class Team extends Site {
 
-        function __construct()    {
-                parent::Controller();
-        }
-
         // team page
         // 
         function index() {
@@ -28,6 +24,9 @@ class Team extends Site {
                 $this->_get_sidebar_data();
 
                 $this->load->module_model('CMS', 'team_model');
+                
+                if (stripos($name, "lemieux"))
+                    $name = 'Rosalyn "Roz" Lemieux';
                 $this->data['team_members'] = $this->team_model->get($name);
                 $this->data['page_title'] = "Fission Strategy: Team";
                 $this->data['selected_name'] = $name;

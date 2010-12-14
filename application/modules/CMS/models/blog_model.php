@@ -24,11 +24,12 @@ class Blog_model extends Model {
 
         // get the list, or specific blog
         //
-        function get($name = '', $limit = 5, $offset = 0, $order = 'DESC', $cms = false) {
+        function get($name = '', $limit = 5, $offset = 0, $order = 'DESC', $cms = false, $preview) {
 
                 $blogs = array();
                 $this->db->select('*, fs_blog.id as id');
-                $this->db->where('status', 'publish');
+                if (!$preview)
+                        $this->db->where('status', 'publish');
                 $this->db->from(self::table_name);
                 if ($name)
                         $this->db->where('name', $name);

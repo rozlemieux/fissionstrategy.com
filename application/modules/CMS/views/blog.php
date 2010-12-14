@@ -37,6 +37,10 @@ echo "</div>";
                   'trash'   => 'Trash',
                 );
       echo form_dropdown('status', $options, $blog->status);
+
+      if ($blog->id)
+              echo "<br /><a href=\"/blog/preview/{$blog->name}\">preview</a>";
+
       ?>
     </div>
 
