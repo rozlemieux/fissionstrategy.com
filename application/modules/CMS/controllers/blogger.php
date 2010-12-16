@@ -98,6 +98,7 @@ class Blogger extends CMS {
                                           $row->Source,
                                           '<a title="Edit" href="/CMS/blogger/edit/' . $row->id . '">' . $blogname . '</a>',
                                           $row->URL,
+                                          $row->catname,
                                           $row->Email,
                                           $row->Email_2,
                                           $row->First_Name,
@@ -140,15 +141,16 @@ class Blogger extends CMS {
                 $this->load->helper('flexigrid');
 
                 $colModel['id'] = array('id',40,TRUE,'center',2);
-                $colModel['Source'] = array('Source',100,TRUE,'left',2);
-                $colModel['Blog_Name'] = array('Blog_Name',150,TRUE,'left',2);
-                $colModel['URL'] = array('URL',300,TRUE,'left',2);
-                $colModel['Email'] = array('Email',200,TRUE,'left',2);
-                $colModel['Email_2'] = array('Email_2',200,TRUE,'left',2);
-                $colModel['First_Name'] = array('First_Name',100,TRUE,'left',2);
-                $colModel['Last_Name'] = array('Last_Name',100,TRUE,'left',2);
+                $colModel['Source'] = array('Source',50,TRUE,'left',2);
+                $colModel['Blog_Name'] = array('Blog_Name',180,TRUE,'left',2);
+                $colModel['URL'] = array('URL',150,TRUE,'left',2);
+                $colModel['catname'] = array('Categories',150,TRUE,'left',2);
+                $colModel['Email'] = array('Email',150,TRUE,'left',2);
+                $colModel['Email_2'] = array('Email_2',150,TRUE,'left',2);
+                $colModel['First_Name'] = array('First_Name',80,TRUE,'left',2);
+                $colModel['Last_Name'] = array('Last_Name',80,TRUE,'left',2);
                 $colModel['City'] = array('City',100,TRUE,'left',2);
-                $colModel['State'] = array('State',100,TRUE,'left',2);
+                $colModel['State'] = array('State',20,TRUE,'left',2);
                 $colModel['Phone'] = array('Phone',100,TRUE,'left',2);
                 $colModel['Skype'] = array('Skype',100,TRUE,'left',2);
                 $colModel['Fax'] = array('Fax',100,TRUE,'left',2);
