@@ -92,15 +92,43 @@ class Blogger extends CMS {
             
                 // NOTE these fields much match the same order as above _load()
                 foreach ($records['records']->result() as $row)	{
-                        $blogname = ($row->Blog_Name != '') ? $row->Blog_Name : '(edit)';
+
+                        // create links for the linkable or emailable values
+                        if ($row->URL != '') {
+                                if ($row->Blog_Name != '')
+                                        $blogname = '<a target="_blank" title="Visit: ' . $row->Blog_Name . '" href="' . $row->URL . '">' . $row->Blog_Name . '</a>';
+                                else 
+                                        $blogname = '<a target="_blank" title="Visit: ' . $row->URL . '" href="' . $row->URL . '">noname</a>';
+                        }
+                        else $blogname = $row->Blog_Name;
+
+                        $blog_email = '';
+                        $blog_email2 = '';
+                        $Web_Form_URL = '';
+                        $Twitter_Outlet = '';
+                        $Facebook = '';
+
+                        if ($row->Email != '') 
+                                $blog_email = '<a title="Compose Email to: ' . $row->Blog_Name . '" href="mailto:' . $row->Email . '">' . $row->Email . '</a>';
+                        if ($row->Email2 != '') 
+                                $blog_email2 = '<a title="Compose Email to: ' . $row->Blog_Name . '" href="mailto:' . $row->Email2 . '">' . $row->Email2 . '</a>';
+                        if ($row->Web_Form_URL != '') 
+                                $Web_Form_URL = '<a target="_blank" title="Visit: ' . $row->Web_Form_URL . '" href="' . $row->Web_Form_URL . '">' . $row->Web_Form_URL . '</a>';
+                        if ($row->Twitter_Outlet != '') 
+                                $Twitter_Outlet = '<a  target="_blank" title="Visit: ' . $row->Twitter_Outlet . '" href="' . $row->Twitter_Outlet . '">' . $row->Twitter_Outlet . '</a>';
+                        
+                        if ($row->Facebook != '') 
+                                $Facebook = '<a  target="_blank" title="Visit: ' . $row->Facebook . '" href="' . $row->Facebook . '">' . $row->Facebook . '</a>';
+                        
+                        // now record the row 
                         $record_items[] = array($row->id,
-                                          $row->id,
+                                          '<a title="Edit this Blogger" href="/CMS/blogger/edit/' . $row->id . '">' . $row->id . '</a>',
                                           $row->Source,
-                                          '<a title="Edit" href="/CMS/blogger/edit/' . $row->id . '">' . $blogname . '</a>',
-                                          $row->URL,
+                                          $blogname,
                                           $row->catname,
-                                          $row->Email,
+                                          $blog_email,
                                           $row->Email_2,
+                                          $Web_Form_URL,
                                           $row->First_Name,
                                           $row->Last_Name,
                                           $row->City,
@@ -108,13 +136,13 @@ class Blogger extends CMS {
                                           $row->Phone,
                                           $row->Skype,
                                           $row->Fax,
-                                          $row->Web_Form_URL,
                                           $row->Authority, 
                                           $row->Twitter_Blogger,
                                           $row->Twitter_Blogger_Followers,
-                                          $row->Twitter_Outlet,
+                                          $Twitter_Outlet,
                                           $row->Twitter_Outlet_Followers,
-                                          $row->Facebook, 
+                                          $Facebook, 
+                                          $row->URL,
                                           $row->Notes,
                                           $row->import_notes,
                                           $row->Estimated_Readership,
@@ -143,10 +171,10 @@ class Blogger extends CMS {
                 $colModel['id'] = array('id',40,TRUE,'center',2);
                 $colModel['Source'] = array('Source',50,TRUE,'left',2);
                 $colModel['Blog_Name'] = array('Blog_Name',180,TRUE,'left',2);
-                $colModel['URL'] = array('URL',150,TRUE,'left',2);
                 $colModel['catname'] = array('Categories',150,TRUE,'left',2);
                 $colModel['Email'] = array('Email',150,TRUE,'left',2);
                 $colModel['Email_2'] = array('Email_2',150,TRUE,'left',2);
+                $colModel['Web_Form_URL'] = array('Web_Form_URL',100,TRUE,'left',2);
                 $colModel['First_Name'] = array('First_Name',80,TRUE,'left',2);
                 $colModel['Last_Name'] = array('Last_Name',80,TRUE,'left',2);
                 $colModel['City'] = array('City',100,TRUE,'left',2);
@@ -155,13 +183,13 @@ class Blogger extends CMS {
                 $colModel['Skype'] = array('Skype',100,TRUE,'left',2);
                 $colModel['Fax'] = array('Fax',100,TRUE,'left',2);
 
-                $colModel['Web_Form_URL'] = array('Web_Form_URL',100,TRUE,'left',2);
                 $colModel['Authority'] = array('Authority',100,TRUE,'left',2);
                 $colModel['Twitter_Blogger'] = array('Twitter_Blogger',200,TRUE,'left',2);
                 $colModel['Twitter_Blogger_Followers'] = array('Twitter_Blogger_Followers',80,TRUE,'left',2);
                 $colModel['Twitter_Outlet'] = array('Twitter_Outlet',100,TRUE,'left',2);
                 $colModel['Twitter_Outlet_Followers'] = array('Twitter_Outlet_Followers',80,TRUE,'left',2);
                 $colModel['Facebook'] = array('Facebook',200,TRUE,'left',2);
+                $colModel['URL'] = array('URL',150,TRUE,'left',2);
                 $colModel['Notes'] = array('Notes',200,TRUE,'left',2);
                 $colModel['import_notes'] = array('Import Notes',200,TRUE,'left',2);
                 $colModel['Estimated_Readership'] = array('Estimated_Readership',80,TRUE,'left',2);

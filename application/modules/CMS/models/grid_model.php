@@ -113,11 +113,10 @@ class Grid_model extends Model {
         //  
         private function _join_category($category_ids) {
 
-
-
                 $concat_category = ' DISTINCT fs_blogger_category.name order by fs_blogger_category.name ';
                 if ($category_ids) {
                         $this->db->select('*, group_concat(' . $concat_category . ') as catname, count(fs_blogger.id), fs_blogger.id as id')->from('fs_blogger');
+                        $this->db->where('od6 is null');
                         $this->db->join("fs_blogger_cat_map", "fs_blogger_cat_map.blogger_id = fs_blogger.id");
                         $this->db->join("fs_blogger_category", "fs_blogger_category.id = fs_blogger_cat_map.category_id");
                         $cat_ids = explode('_', $category_ids);
@@ -129,6 +128,7 @@ class Grid_model extends Model {
                 }
                 else {
                         $this->db->select('*, group_concat(' . $concat_category . ' ) as catname, fs_blogger.id as id')->from('fs_blogger');
+                        $this->db->where('od6 is null');
                         $this->db->join("fs_blogger_cat_map", "fs_blogger_cat_map.blogger_id = fs_blogger.id");
                         $this->db->join("fs_blogger_category", "fs_blogger_category.id = fs_blogger_cat_map.category_id");
                         $this->db->group_by("fs_blogger.id");
