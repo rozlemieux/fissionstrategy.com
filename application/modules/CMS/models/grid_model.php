@@ -112,9 +112,13 @@ class Grid_model extends Model {
         // if categor(ies) specified, join category_map and group by id to return only those which are in all categories specified
         //  
         private function _join_category($category_ids) {
+
+                $concat_category = ' DISTINCT fs_blogger_category.name order by fs_blogger_category.name ';
                 if ($category_ids) {
-                        $this->db->select('*, count(fs_blogger.id), fs_blogger.id as id')->from('fs_blogger');
+                        $this->db->select('*, group_concat(' . $concat_category . ') as catname, count(fs_blogger.id), fs_blogger.id as id')->from('fs_blogger');
+                        $this->db->where('od6 is null');
                         $this->db->join("fs_blogger_cat_map", "fs_blogger_cat_map.blogger_id = fs_blogger.id");
+                        $this->db->join("fs_blogger_category", "fs_blogger_category.id = fs_blogger_cat_map.category_id");
                         $cat_ids = explode('_', $category_ids);
                         foreach ($cat_ids as $i => $cat) 
                                 $this->db->or_where("fs_blogger_cat_map.category_id", $cat);
@@ -122,8 +126,13 @@ class Grid_model extends Model {
                         if (count($cat_ids) > 1)
                                 $this->db->having("count(fs_blogger.id) > " . (count($cat_ids) - 1));
                 }
-                else
-                        $this->db->select('*, fs_blogger.id as id')->from('fs_blogger');
+                else {
+                        $this->db->select('*, group_concat(' . $concat_category . ' ) as catname, fs_blogger.id as id')->from('fs_blogger');
+                        $this->db->where('od6 is null');
+                        $this->db->join("fs_blogger_cat_map", "fs_blogger_cat_map.blogger_id = fs_blogger.id");
+                        $this->db->join("fs_blogger_category", "fs_blogger_category.id = fs_blogger_cat_map.category_id");
+                        $this->db->group_by("fs_blogger.id");
+                }
         }
 
 }

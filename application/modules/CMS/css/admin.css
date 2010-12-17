@@ -388,3 +388,17 @@ form input {
 .flexigrid div.fbutton .select {
     background: url(/img/tick.png) no-repeat center left;
 }			
+
+#fullpage {
+    float:right; 
+    margin-right: 100px;
+    padding: 10px;
+    background-color:#333;	
+    box-shadow: 0 1px 0 gray;
+    -moz-box-shadow: 0 1px 0 gray;
+    -webkit-box-shadow: 0 1px 0 gray;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    cursor: pointer;
+    color: white;
+} 

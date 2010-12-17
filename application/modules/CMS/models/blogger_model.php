@@ -42,7 +42,7 @@ class Blogger_model extends Model {
                 $this->id = $id;
         }
 
-        // get list of categories, or specific one by email address
+        // get list of bloggers, or specific one by email address
         //
         function get($email = '', $limit = 99, $offset = 0, $category = 0) {
 
@@ -50,6 +50,7 @@ class Blogger_model extends Model {
 
                 $blogger = array();
                 $this->db->select('*, fs_blogger.id as id');
+                $this->db->where('od6 is null');
                 $this->db->from(self::table_name);
                 if ($category > 1) {
                         $this->db->join('fs_map', 'fs_map.blogger_id = fs_blogger.id');

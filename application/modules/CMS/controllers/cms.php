@@ -39,18 +39,32 @@ class CMS extends Controller {
         function export($contents, $record_items) {
 
                 $dirname = $this->config->item('base_dir');
-                $name = 'exports/' . time() . '.csv';
+                $name = 'exports/' . time() . '.xls';
                 $filename = $dirname . $name;
 
+                // set up header as tab delimited
+                $contents = str_replace(' ', "", $contents);
+                $contents = str_replace(',', "\t", $contents);
+
                 foreach ($record_items as $item) {
+                        $line = '';
                         foreach ($item as $value) {
-                                if ($value)
-                                    $contents .= str_replace(',', ";", $value);
-                                $contents .= ',';
+                                if ((!isset($value)) OR ($value == "")) {
+                                        $value = "\t";
+                                } else {
+                                        $value = str_replace('"', '""', $value);
+                                        $value = '"' . $value . '"' . "\t";
+                                }
+                                $line .= $value;
                         }
-                        $contents .= "\n";
+                        $contents .= trim($line)."\n";
                 }
+                
+                $contents = str_replace("\r","",$contents);
+
                 file_put_contents($filename, $contents);
+                //          header("Content-type: application/x-msdownload");
+                //          header("Content-Disposition: attachment; filename=$filename.xls");
 
                 $this->output->set_output($this->config->item('base_url') . $name);
         }
