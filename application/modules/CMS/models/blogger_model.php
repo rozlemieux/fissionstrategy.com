@@ -50,7 +50,6 @@ class Blogger_model extends Model {
 
                 $blogger = array();
                 $this->db->select('*, fs_blogger.id as id');
-                $this->db->where('od6 is null');
                 $this->db->from(self::table_name);
                 if ($category > 1) {
                         $this->db->join('fs_map', 'fs_map.blogger_id = fs_blogger.id');
