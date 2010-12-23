@@ -89,9 +89,21 @@ html, body {
 	float: left;
 }
 
+#sms-advocacy {
+	background-image: url(/img/sms.jpg);
+	width: 196px;
+	height: 111px;
+	float: right;
+	cursor: pointer;
+}
+
+#sms-advocacy:hover {
+	background-image: url(/img/sms-hover.jpg);
+}
+
 .navigation {
 	float: right;
-	padding-top: 60px;
+	padding-top: 50px;
 }
 
 .navigation ul li {

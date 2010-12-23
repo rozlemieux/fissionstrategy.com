@@ -7,8 +7,13 @@
   <?php 
   echo form_open('/CMS/login/validate_credentials');
 
+  if ($error) echo "<div class='error'>$error</div>";
+
   echo form_label('Username', 'username');
-  $data = array('name' => 'username', 'maxlength' => '100', 'size' => '50');
+  $data = array('id' => 'username', 'name' => 'username', 'maxlength' => '100', 'size' => '50');
+  echo form_input($data);
+
+  $data = array('name' => 'redirect', 'value' => "/" . $redirect, 'type' => 'hidden');
   echo form_input($data);
 
   $data['name'] = 'password';
@@ -23,3 +28,10 @@
 
 </div>
 
+<script>
+
+jQuery(document).ready(function() {
+     $('#username').focus();
+});
+
+</script>

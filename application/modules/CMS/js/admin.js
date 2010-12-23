@@ -24,7 +24,12 @@ $(document).ready(function() {
 
     }); 
 
+// this is to set up only relevent column displays - some categories only use a few columns of real data
+//
 function fs_toggle_cols() {
+
+
+    return;
 
     if (typeof active_category_id == 'undefined')
             return;
