@@ -261,8 +261,8 @@ form input {
 	-moz-border-radius: 3px;
 }
 
-#login_form form {
-    background-color: #1f4104;
+#login_form .error {
+    color: red;
 }
 
 #login_form input[type=text], input[type=password] {
@@ -402,3 +402,7 @@ form input {
     cursor: pointer;
     color: white;
 } 
+
+.cke_dialog_body label {
+    float: none;
+}

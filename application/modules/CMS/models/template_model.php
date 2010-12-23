@@ -80,6 +80,36 @@ class Template_model extends Model {
                 return $files;
         }
 
+        // list all revisions for this file
+        //
+        function _list_revisions($dirkey, $dirname) {
+
+                $files = array();
+                $rootname = $this->config->item('base_path');
+
+                $handle = opendir($rootname . $dirname);
+        
+                if (!$handle) return array();
+                while (($filename = readdir($handle)) !== false ) {
+                        if ($filename == "." || $filename == "..")
+                                continue;
+                        if (!preg_match('/.+\.(php|css|js)$/', $filename))
+                                continue;
+
+                        if (is_dir($dirname . '/' . $filename)) 
+                                continue;
+
+                        $path = "$rootname$dirname$filename";
+                        if (file_exists($path)) {
+                                $files[] = array('dir' => $dirkey, 'name' => "$filename");
+                        }
+
+                }
+                closedir($handle);
+
+                return $files;
+        }
+
 }
 
 ?>
