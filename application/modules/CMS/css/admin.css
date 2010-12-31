@@ -406,3 +406,80 @@ form input {
 .cke_dialog_body label {
     float: none;
 }
+
+#lightbox {
+    display:none;
+    background:white;
+    opacity:0.3;
+    filter:alpha(opacity=30);
+}
+
+#edit_popup {
+    position: absolute; 
+    z-index: 9000; 
+    background-color: lightgray;
+    float:left;
+    font-size: 12px;
+    padding:10px;
+}
+
+#edit_popup input {
+    font-size: 11px;
+    width: 340px;
+}
+
+form .popup_button {
+    color: white;
+    background-color:#333;	
+    box-shadow: 0 1px 0 white;
+    -moz-box-shadow: 0 1px 0 white;
+    -webkit-box-shadow: 0 1px 0 gray;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    padding: 2px;
+    width: 60px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.popup_button a:visited {
+    text-decoration: none;
+}
+
+.popup_buttons {
+    clear:both;
+    padding-top: 20px;
+    margin: 20px auto 0;
+    width: 200px;
+}
+
+.popup_label {
+    float:left;
+    width: 80px;
+}
+
+.popup_button a {
+    color: white;
+}
+
+#popup_value {
+    float: left;
+}
+
+.editable_cell {
+    cursor: pointer;
+}
+
+.edit-row {
+    background: url("/img/edit_row.png") no-repeat scroll left top transparent;
+    height: 8px;
+    margin: -24px 0 0 0;
+    text-indent: -9999px;
+    width: 110px;
+    z-index: 3000;
+}
+
+.currently_editing { 
+    background-color: lightgray;
+}
+

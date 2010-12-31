@@ -63,6 +63,19 @@ class Blog extends CMS {
 		}
         }
 
+        // ajax call to update one field (called from grid / dashboard)
+        function update_field() {
+            $id = $this->input->post('edit_id');
+            $field = $this->input->post('field_name');
+            $value = $this->input->post($field) ? $this->input->post($field) : $this->input->post('value');
+
+            $team = new Blog_model($id);
+            $team->$field = $value;
+            $team->save(null);
+            
+            echo $value;
+        }
+
         // ajax call from flexigrid to populate rows
         //
         function ajax_get_blog() {
@@ -80,23 +93,21 @@ class Blog extends CMS {
 
                 // NOTE these fields much match the same order as _load()
                 foreach ($records['records']->result() as $row)	{
-                        $record_items[] = array($row->id,
-                                          $row->id,
+                        $record_items[] = array($row->bid,
+                                          $row->bid . '<a title="Edit" href="/CMS/blog/edit/' . $row->bid . '"> [edit]</a>',
                                           "<img width='50' src='/uploads/images/Blog/$row->thumb' />",
-                                          $row->status,
-                                          '<a title="Edit" href="/CMS/blog/edit/' . $row->id . '">' . $row->title . '</a>',
+                                          $this->_make_editable_field($row->title),
+                                          $this->_make_editable_select($row->status),
                                           $row->first_name . ' ' . $row->last_name,
+                                          $this->_make_editable_field($row->name),
                                           $row->date,
-                                          $row->modified,
-                                          $row->new,
-                                          $row->quote,
-                                          $row->name
+                                          $row->modified
                         );
                 }
 
                 // create a temp export file of this data
                 if ($this->input->post('export')) {
-                        $contents = '"rowid", "id","Thumb", "Status", "Name","Created_Date","Modified","New","Quote", "name"' . "\n";
+                        $contents = '"rowid", "id","Thumb", "Status", "Name","Created_Date","Modified","name"' . "\n";
                         $this->export($contents, $record_items);
                         return;
                 }
@@ -109,16 +120,14 @@ class Blog extends CMS {
         function _load() {
                 $this->load->helper('flexigrid');
 
-                $colModel['fs_blog.id'] = array('id',40,TRUE,'center',2);
+                $colModel['bid'] = array('bid',40,TRUE,'center',2);
                 $colModel['thumb'] = array('Thumb',50,TRUE,'center',2);
-                $colModel['status'] = array('Status',40,TRUE,'center',2);
                 $colModel['title'] = array('Title',400,TRUE,'left',2);
+                $colModel['status'] = array('Status',40,TRUE,'center',2);
                 $colModel['author'] = array('Author',100,TRUE,'left',2);
+                $colModel['name'] = array('Name',300,TRUE,'left',2);
                 $colModel['date'] = array('Created',100,TRUE,'left',2);
                 $colModel['modified'] = array('Modified',100,TRUE,'left',2);
-                $colModel['new'] = array('New',20,TRUE,'left',2);
-                $colModel['quote'] = array('Quote',200,TRUE,'left',2);
-                $colModel['name'] = array('Name',300,TRUE,'left',2);
 		
                 $gridParams = array(
                         'width' => 'auto',
@@ -135,7 +144,7 @@ class Blog extends CMS {
                 $buttons[] = array('DeSelect All','deselect all','grid_functions');
                 $buttons[] = array('Delete','delete','grid_functions');
                 $buttons[] = array('Export','export','grid_functions');
-                $grid_js = build_grid_js('Grid',site_url("CMS/blog/ajax_get_blog"),$colModel,'date','desc',$gridParams, $buttons);
+                $grid_js = build_grid_js('Grid',site_url("CMS/blog/ajax_get_blog"),$colModel,'bid','desc',$gridParams, $buttons);
         
                 return $grid_js;
         }
@@ -155,10 +164,12 @@ class Blog extends CMS {
 
                 $this->_build_calendar();
                 $this->load->helper('ckeditor');
-                $data['ckeditor'] = array('id' => 'content', 'path'	=> '/public/js/ckeditor', 'config' => array(
+                $data['ckeditor'] = array('id' => 'content', 
+                                    'path'	=> '/public/js/ckeditor', 
+                                    'config' => array(
                                             'toolbar' 	=> 	"CMS_Full", 
                                             'width' 	=> 	"662px",
-                                            'height' 	=> 	'600px',
+                                            'height' 	=> 	'600px'
                                     ));
 		
                 $data['main_content'] = 'blog';

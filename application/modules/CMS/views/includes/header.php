@@ -19,6 +19,7 @@
   </head>
 
   <body>
+    <div id="lightbox"></div>
     <div class="wrapper">
      <div class="header">
        <a href="/" class="logo"></a>

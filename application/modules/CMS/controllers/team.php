@@ -57,6 +57,19 @@ class Team extends CMS {
 		}
         }
 
+        // ajax call to update one field (called from grid / dashboard)
+        function update_field() {
+            $id = $this->input->post('edit_id');
+            $field = $this->input->post('field_name');
+            $value = $this->input->post('value');
+
+            $team = new Team_model($id);
+            $team->$field = $value;
+            $team->save(null);
+
+            echo $value;
+        }
+
         // ajax call from flexigrid to populate rows
         //
         function ajax_load_team_members() {
@@ -73,14 +86,14 @@ class Team extends CMS {
                 // NOTE these fields much match the same order as above _load()
                 foreach ($records['records']->result() as $row)	{
                         $record_items[] = array($row->id,
-                                          $row->id,
+                                          $row->id . ' <a title="Open Editor" href="/CMS/team/edit/' . $row->id . '">[edit]</a>',
                                           "<img width='50' src='/uploads/images/Team/$row->photo' />",
-                                          '<a title="Edit" href="/CMS/team/edit/' . $row->id . '">' . $row->name . '</a>',
-                                          $row->team_title,
-                                          $row->email,
-                                          $row->linkedin,
-                                          $row->twitter,
-                                          $row->skype,
+                                          $this->_make_editable_field($row->name),
+                                          $this->_make_editable_field($row->team_title),
+                                          $this->_make_editable_field($row->email),
+                                          $this->_make_editable_field($row->linkedin),
+                                          $this->_make_editable_field($row->twitter),
+                                          $this->_make_editable_field($row->skype),
                                           $row->modified
                         );
                 }
@@ -88,7 +101,6 @@ class Team extends CMS {
                 // create a temp export file of this data
                 if ($this->input->post('export')) {
                         $contents = '"rowid", "id", "Photo","Name", "Team Title", "Email","Linked In", "Twitter", "Skype", "Date Modified"' . "\n";
-                        error_log(" what is the problem??");
                         $this->export($contents, $record_items);
                         return;
                 }

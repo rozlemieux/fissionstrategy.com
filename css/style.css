@@ -1174,3 +1174,44 @@ table.calendar {
     float: right;
 }
 
+#lightbox {
+    display:none;
+    background:#0a810f; 
+    opacity:0.3;
+    filter:alpha(opacity=30);
+    position:absolute;
+    top:0px;
+    left:0px;
+    min-width:100%;
+    min-height:100%;
+    z-index:2000;
+    padding: 0;
+}
+
+#lightbox-panel {
+    display:none;
+    position: absolute;
+    top:200px;
+    left: 200px;
+    width:600px;
+    background:#FFF;
+    padding:20px 40px;
+    border:2px solid #3F58BB;
+    box-shadow: 0 4px 0 #3F58BB;
+    -moz-box-shadow: 0 1px 0 gray;
+    -webkit-box-shadow: 0 1px 0 gray;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    z-index:2001;
+}
+
+#lightbox-panel .close-panel {
+       float: right;
+       background-image: url(/img/close-x.gif);
+       background-position: right  top;
+       background-repeat: no-repeat;
+       height: 43px;
+       width: 150px;
+       cursor: pointer;
+}
+
