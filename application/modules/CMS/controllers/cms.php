@@ -19,6 +19,10 @@ class CMS extends Controller {
                 }		
         }
 
+        function index() {
+            redirect("/CMS/blog");
+        }
+
         // common function to truncate strings
         //
         function truncate($string, $limit, $break=".", $pad="...") {
@@ -86,6 +90,29 @@ class CMS extends Controller {
 
         }
 
+        // make this an editable cell in the grid
+        function _make_editable_field($field) {
+            if ($this->input->post('export')) 
+                return $field;
+            return '<div class="editable_cell">' . $field . '</div>';
+        }
+
+        // make this an editable cell with a select
+        function _make_editable_select($field) {
+            if ($this->input->post('export')) 
+                return $field;
+
+            $extra = '<select name="status">
+                         <option value="draft">Draft</option>
+                         <option selected="selected" value="publish">Publish</option>
+                         <option value="private">Private</option>
+                         <option value="trash">Trash</option>
+                       </select>';
+            
+            $r = '<div class="editable_cell">' . $field . '</div>';
+            $r .= '<div style="display:none" class="editable_extra">' . $extra . '</div>';
+            return $r;
+        }
 }
 
  

@@ -48,10 +48,11 @@ class Team_model extends Model {
         // save this team member object to the database
         //
         function save($changes) {
+            if ($changes)
                 $this->_save_changes($changes);
 
-                $this->db->where('id', $this->id);
-                $this->db->update(self::table_name, $this);
+            $this->db->where('id', $this->id);
+            $this->db->update(self::table_name, $this);
         }
 
         // create a new database team member

@@ -20,7 +20,7 @@ class Grid_model extends Model {
         public function get_blog() {
                 // return all records that match the critera and fall within the page
                 // 
-                $this->db->select('*, fs_blog.id as id')->from('fs_blog');
+                $this->db->select('*, fs_blog.id as bid')->from('fs_blog');
                 $this->db->join("fs_membership", "fs_membership.id = fs_blog.author");
                 if (empty($_POST['sortname']))
                         $this->db->order_by('fs_blog.id', 'DESC');
@@ -29,7 +29,7 @@ class Grid_model extends Model {
                 $rs['records'] = $this->db->get();
 
                 // now return the total count that meet this criteria
-                $this->db->select('*, fs_blog.id as id')->from('fs_blog');
+                $this->db->select('*, fs_blog.id as bid')->from('fs_blog');
                 $this->db->join("fs_membership", "fs_membership.id = fs_blog.author");
                 if (empty($_POST['sortname']))
                         $this->db->order_by('fs_blog.id', 'DESC');
