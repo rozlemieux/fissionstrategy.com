@@ -1166,6 +1166,17 @@ table.calendar {
 	font-weight: bold; color: #000;
 }
 
+.NOTcalendar .day_num {
+    float: left;
+    width: 20px;
+}
+
+.calendar .cell_content {
+    color: #339977;
+    font-size:11px;
+    line-height: 11px;
+}
+
 #contact_form input {
         margin: 10px 0;
 }

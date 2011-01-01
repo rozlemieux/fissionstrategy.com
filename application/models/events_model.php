@@ -1,18 +1,18 @@
 <?php
 class Events_model extends Model {
 	
-	var $conf;
+    var $conf;
 	
-	function Events_model () {
-		parent::Model();
+    function Events_model () {
+        parent::Model();
 		
-		$this->conf = array(
-			'start_day' => 'monday',
-			'show_next_prev' => true,
-			'next_prev_url' => base_url() . 'events/display'
-		);
+        $this->conf = array(
+            'start_day' => 'monday',
+            'show_next_prev' => true,
+            'next_prev_url' => base_url() . 'events/display'
+        );
 		
-		$this->conf['template'] = '
+        $this->conf['template'] = '
 			{table_open}<table border="0" cellpadding="0" cellspacing="0" class="calendar">{/table_open}
 			
 			{heading_row_start}<tr>{/heading_row_start}
@@ -50,52 +50,55 @@ class Events_model extends Model {
 			{table_close}</table>{/table_close}
 		';
 		
-	}
+    }
 	
-	function get_calendar_data($year, $month) {
+    function get_calendar_data($year, $month) {
 		
-		$query = $this->db->select('date, description')->from('fs_events')
-			->like('date', "$year-$month", 'after')->get();
+        $query = $this->db->select('date, description')->from('fs_events')
+            ->like('date', "$year-$month", 'after')->get();
 			
-		$cal_data = array();
+        $cal_data = array();
 		
-		foreach ($query->result() as $row) {
-			$cal_data[substr($row->date,8,2)] = $row->description;
-		}
+        foreach ($query->result() as $row) {
+            if (isset($cal_data[substr($row->date,8,2) + 0]))
+                $cal_data[substr($row->date,8,2) + 0] .= '<a href="here">' . $row->description . '</a>';
+            else 
+                $cal_data[substr($row->date,8,2) + 0] = '<a href="here">' . $row->description . '</a>';
+        }
 		
-		return $cal_data;
+        return $cal_data;
 		
-	}
+    }
 	
-	function add_calendar_data($date, $description) {
+    function add_calendar_data($date, $description) {
 		
-		if ($this->db->select('date')->from('fs_events')
-                        ->where('date', $date)->count_all_results()) {
+        if ($this->db->select('date')->from('fs_events')
+            ->where('date', $date)->count_all_results()) {
 			
-			$this->db->where('date', $date)
-				->update('fs_events', array(
-                                                'date' => $date,
-                                                'description' => $description			
-                                        ));
+            $this->db->where('date', $date)
+                ->update('fs_events', array(
+                        'date' => $date,
+                        'description' => $description			
+                    ));
 			
-		} else {
+        } else {
 		
-			$this->db->insert('fs_events', array(
-                                        'date' => $date,
-                                        'description' => $description
-                                ));
-		}
+            $this->db->insert('fs_events', array(
+                    'date' => $date,
+                    'description' => $description
+                ));
+        }
 		
-	}
+    }
 	
-	function generate ($year, $month) {
+    function generate ($year, $month) {
 		
-		$this->load->library('calendar', $this->conf);
+        $this->load->library('calendar', $this->conf);
 		
-		$cal_data = $this->get_calendar_data($year, $month);
+        $cal_data = $this->get_calendar_data($year, $month);
 		
-		return $this->calendar->generate($year, $month, $cal_data);
+        return $this->calendar->generate($year, $month, $cal_data);
 		
-	}
+    }
 	
 }

@@ -417,10 +417,19 @@ form input {
 #edit_popup {
     position: absolute; 
     z-index: 9000; 
-    background-color: lightgray;
+    background-color: #ab7b5a;
     float:left;
-    font-size: 12px;
+    font-size: 14px;
     padding:10px;
+}
+
+.currently_editing { 
+    background-color: #ab7b5a;
+}
+
+#edit_popup #popup_who a {
+    color: white;
+    font-size: 14px;
 }
 
 #edit_popup input {
@@ -431,11 +440,8 @@ form input {
 form .popup_button {
     color: white;
     background-color:#333;	
-    box-shadow: 0 1px 0 white;
-    -moz-box-shadow: 0 1px 0 white;
-    -webkit-box-shadow: 0 1px 0 gray;
-    -moz-border-radius: 10px;
-    -webkit-border-radius: 10px;
+    -moz-border-radius: 12px;
+    -webkit-border-radius: 12px;
     padding: 2px;
     width: 60px;
     text-align: center;
@@ -453,17 +459,13 @@ form .popup_button {
     width: 200px;
 }
 
-.popup_label {
-    float:left;
-    width: 80px;
-}
-
 .popup_button a {
     color: white;
 }
 
 #popup_value {
     float: left;
+    height: 40px;
 }
 
 .editable_cell {
@@ -479,7 +481,4 @@ form .popup_button {
     z-index: 3000;
 }
 
-.currently_editing { 
-    background-color: lightgray;
-}
 
