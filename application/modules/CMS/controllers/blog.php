@@ -94,7 +94,7 @@ class Blog extends CMS {
                 // NOTE these fields much match the same order as _load()
                 foreach ($records['records']->result() as $row)	{
                         $record_items[] = array($row->bid,
-                                          $row->bid . '<a title="Edit" href="/CMS/blog/edit/' . $row->bid . '"> [edit]</a>',
+                                          $this->_make_action_field($row->bid, "/CMS/blog/edit" . $row->bid),
                                           "<img width='50' src='/uploads/images/Blog/$row->thumb' />",
                                           $this->_make_editable_field($row->title),
                                           $this->_make_editable_select($row->status),

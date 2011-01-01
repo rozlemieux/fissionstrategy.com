@@ -90,6 +90,14 @@ class CMS extends Controller {
 
         }
 
+        // make the id cell with edit, ... actions
+        function _make_action_field($field, $link) {
+            $r = $field . '<br />';
+            $r .= '<a title="Open full editor" href="' . $link . '">';
+            $r .= '<img src="/img/comment_edit.png" /></a>';
+            return $r;
+        }
+
         // make this an editable cell in the grid
         function _make_editable_field($field) {
             if ($this->input->post('export')) 

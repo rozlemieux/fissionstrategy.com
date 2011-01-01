@@ -86,7 +86,7 @@ class Team extends CMS {
                 // NOTE these fields much match the same order as above _load()
                 foreach ($records['records']->result() as $row)	{
                         $record_items[] = array($row->id,
-                                          $row->id . ' <a title="Open Editor" href="/CMS/team/edit/' . $row->id . '">[edit]</a>',
+                                          $this->_make_action_field($row->id, "/CMS/team/edit/" . $row->id),
                                           "<img width='50' src='/uploads/images/Team/$row->photo' />",
                                           $this->_make_editable_field($row->name),
                                           $this->_make_editable_field($row->team_title),

@@ -12,10 +12,12 @@ if (isset($create_button)) {   ?>
     <input id="edit_id" name="edit_id" type="hidden" value="" />
     <input id="field_name" name="field_name" type="hidden" value="" />
 
-    <div><div class="popup_label">Editing:</div><div id="popup_who"></div></div>
-    <h3><span id="popup_title"></span>: </h3>
-    <input type="text" name="value" id="popup_value" />
-    <div id="popup_extra"></div>
+    <div id="popup_who"></div>
+    <div>
+      <div class="popup_label">Editing: <span id="popup_title"></span></div>
+      <div><textarea type="text" name="value" id="popup_value" /></textarea></div>
+      <div id="popup_extra"></div>
+    </div>
     <div class="popup_buttons">
       <div id="save" style="float: right" class="popup_button">Save</div>
       <div id="cancel" class="popup_button">Cancel</div>

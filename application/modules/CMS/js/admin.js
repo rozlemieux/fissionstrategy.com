@@ -17,6 +17,7 @@ $(document).ready(function() {
                     this.select();
                 }
             });
+
         $('.focusable').blur(function() {
                 if (this.value == '') {
                     this.value = (this.defaultValue ? this.defaultValue : '');
@@ -39,7 +40,6 @@ $(document).ready(function() {
 // respond to editable cell save button
 //
 function save_popup_edits() {
-
     dataString = $('#edit_popup form').serialize();
     $.ajax({
         type: "POST",
@@ -160,7 +160,7 @@ function fs_toggle_cols() {
     // hovering over editable cells displays the 'edit' png
     $('.editable_cell').hover(
         function () {
-            $(this).parent().append($('<div class="edit-row">edit</div>'));
+            $(this).parent().append($('<div class="edit-row"></div>'));
         }, 
         function () {
             $(this).parent().find("div:last").remove();
