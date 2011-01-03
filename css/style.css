@@ -1177,6 +1177,10 @@ table.calendar {
     line-height: 11px;
 }
 
+.calendar .cell_content a {
+    color: #339977;
+}
+
 #contact_form input {
         margin: 10px 0;
 }

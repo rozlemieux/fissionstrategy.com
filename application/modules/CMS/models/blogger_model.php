@@ -82,9 +82,17 @@ class Blogger_model extends Model {
 
         // save blogger to database
         //
+        function save_field() {
+            $this->db->where('id', $this->id);
+            $this->db->update(self::table_name, $this);
+        }
+            
+        // save blogger to database
+        //
         function save($changes) {
                 // delete any current categories
-                $this->db->delete('fs_blogger_cat_map', array('blogger_id' => $this->id)); 
+                if (isset($changes['category'])) 
+                    $this->db->delete('fs_blogger_cat_map', array('blogger_id' => $this->id)); 
 
                 // if new category, create it first
                 if (isset($changes['new_category']) && ($changes['new_category'] != '')) {
@@ -96,14 +104,14 @@ class Blogger_model extends Model {
                 // add any categories
                 $categories = $changes['category'];
                 foreach ($categories as $i => $cat_id) {
-                        $data = array(
-                                'blogger_id' => $this->id,
-                                'category_id' => $cat_id
-                        );
-                        $this->db->insert('fs_blogger_cat_map', $data);
+                    $data = array(
+                        'blogger_id' => $this->id,
+                        'category_id' => $cat_id
+                    );
+                    $this->db->insert('fs_blogger_cat_map', $data);
                 }
 
-                // copy each value from 4changes into the variable for this object if that variable exists
+                // copy each value from $changes into the variable for this object if that variable exists
                 if (is_array($changes)) {
                         foreach ($changes as $key => $value) {
                                 if (property_exists($this, $key)) 

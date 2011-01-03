@@ -6,7 +6,7 @@ if ($active_category == '')
 
 echo '<script type="text/javascript">var active_category_id = "' . $active_category . '";</script>';
 
-echo '<div id="fullpage">full page width</div>';
+//echo '<div id="fullpage">full page width</div>';
 echo '<form method="POST" action="/CMS/blogger/get_category">';
 echo "<h2>Category:</h2>";
 echo "<div style='float:left;padding-bottom:20px;'>$categories</div>";
@@ -22,20 +22,23 @@ if (isset($create_button)) {   ?>
 
 <table id="Grid" style="display:none"></table>
 
-
 <script>
 
 $(document).ready(function() {
 
-                $('#fullpage').click(function() {
-                                if ($('.wrapper').width() < 1000)
-                                        $('.wrapper').width('98%');
-                                else 
-                                        $('.wrapper').width('988px');
-                                return false;
-                        });
+        // just set it to full width
+        $('.wrapper').width('98%');
+
+        // not using button anymore 
+        $('#fullpage').click(function() {
+                if ($('.wrapper').width() < 1000)
+                    $('.wrapper').width('98%');
+                else 
+                    $('.wrapper').width('988px');
+                return false;
+            });
 
 
-        });
+    });
 
 </script>

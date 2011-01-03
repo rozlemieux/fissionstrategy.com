@@ -64,6 +64,19 @@ class Case_study extends CMS {
 		}
         }
 
+        // ajax call to update one field (called from grid / dashboard)
+        function update_field() {
+            $id = $this->input->post('edit_id');
+            $field = $this->input->post('field_name');
+            $value = $this->input->post($field) ? $this->input->post($field) : $this->input->post('value');
+
+            $team = new Case_study_model($id);
+            $team->$field = $value;
+            $team->save(null);
+            
+            echo $value;
+        }
+
         // ajax call from flexigrid to populate rows
         //
         function ajax_load_case_study() {
@@ -80,15 +93,15 @@ class Case_study extends CMS {
                 // NOTE these fields much match the same order as above _load()
                 foreach ($records['records']->result() as $row)	{
                         $record_items[] = array($row->id,
-                                          $row->id,
+                                          $this->_make_action_field($row->id, "/CMS/case_study/edit/" . $row->id),
                                           "<img width='50' src='/uploads/images/CaseStudies/{$row->image}.sm.jpg' />",
-                                          $row->status,
-                                          '<a class="grid_edit" title="Edit" href="/CMS/case_study/edit/' . $row->id . '">' . $row->title . '</a>',
-                                          $row->quote,
+                                          $this->_make_editable_field($row->title),
+                                          $this->_make_editable_select($row->status),
+                                          $this->_make_editable_field($row->new),
+                                          $this->_make_editable_field($row->quote),
+                                          $this->_make_editable_field($row->author),
                                           $row->date,
                                           $row->modified,
-                                          $row->new,
-                                          $row->author,
                                           $row->name
                         );
                 }
@@ -110,13 +123,13 @@ class Case_study extends CMS {
 
                 $colModel['id'] = array('id',40,TRUE,'center',2);
                 $colModel['image'] = array('Image',50,TRUE,'left',2);
-                $colModel['status'] = array('Status',50,TRUE,'left',2);
                 $colModel['title'] = array('Title',200,TRUE,'left',2);
+                $colModel['status'] = array('Status',50,TRUE,'left',2);
+                $colModel['new'] = array('New',40,TRUE,'left',2);
                 $colModel['quote'] = array('Quote',420,TRUE,'left',2);
+                $colModel['author'] = array('Author',40,TRUE,'left',2);
                 $colModel['date'] = array('Created',100,TRUE,'left',2);
                 $colModel['modified'] = array('Modified',100,TRUE,'left',2);
-                $colModel['new'] = array('New',40,TRUE,'left',2);
-                $colModel['author'] = array('Author',40,TRUE,'left',2);
                 $colModel['name'] = array('Name',200,TRUE,'left',2);
 		
                 $gridParams = array(
@@ -134,7 +147,7 @@ class Case_study extends CMS {
                 $buttons[] = array('DeSelect All','deselect all','grid_functions');
                 $buttons[] = array('Delete','delete','grid_functions');
                 $buttons[] = array('Export','export','grid_functions');
-                $grid_js = build_grid_js('Grid',site_url("CMS/case_study/ajax_load_case_study"),$colModel,'title','asc',$gridParams, $buttons);
+                $grid_js = build_grid_js('Grid',site_url("CMS/case_study/ajax_load_case_study"),$colModel,'id','desc',$gridParams, $buttons);
         
                 return $grid_js;
         }

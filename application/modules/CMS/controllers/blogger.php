@@ -78,6 +78,19 @@ class Blogger extends CMS {
 		}
         }
 
+        // ajax call to update one field (called from grid / dashboard)
+        function update_field() {
+            $id = $this->input->post('edit_id');
+            $field = $this->input->post('field_name');
+            $value = $this->input->post($field) ? $this->input->post($field) : $this->input->post('value');
+
+            $blogger = new Blogger_model($id);
+            $blogger->$field = $value;
+            $blogger->save_field();
+            
+            echo $value;
+        }
+
         // ajax call from flexigrid to populate rows
         //
         function ajax_load_blogger($cat_ids = '') {
@@ -122,31 +135,31 @@ class Blogger extends CMS {
                         
                         // now record the row 
                         $record_items[] = array($row->id,
-                                          '<a title="Edit this Blogger" href="/CMS/blogger/edit/' . $row->id . '">' . $row->id . '</a>',
-                                          $row->Source,
-                                          $blogname,
+                                          $this->_make_action_field($row->id, "/CMS/blogger/edit/" . $row->id),
+                                          $this->_make_editable_field($row->Source),
+                                          $this->_make_editable_url($row->Blog_Name, $blogname),
                                           $row->catname,
-                                          $blog_email,
-                                          $row->Email_2,
-                                          $Web_Form_URL,
-                                          $row->First_Name,
-                                          $row->Last_Name,
-                                          $row->City,
-                                          $row->State,
-                                          $row->Phone,
-                                          $row->Skype,
-                                          $row->Fax,
-                                          $row->Authority, 
-                                          $row->Twitter_Blogger,
-                                          $row->Twitter_Blogger_Followers,
-                                          $Twitter_Outlet,
-                                          $row->Twitter_Outlet_Followers,
-                                          $Facebook, 
-                                          $row->URL,
-                                          $row->Notes,
-                                          $row->import_notes,
-                                          $row->Estimated_Readership,
-                                          $row->Additional_Contacts
+                                          $this->_make_editable_url($row->Email, $blog_email),
+                                          $this->_make_editable_field($row->Email_2),
+                                          $this->_make_editable_url($row->Web_Form_URL, $Web_Form_URL),
+                                          $this->_make_editable_field($row->First_Name),
+                                          $this->_make_editable_field($row->Last_Name),
+                                          $this->_make_editable_field($row->City),
+                                          $this->_make_editable_field($row->State),
+                                          $this->_make_editable_field($row->Phone),
+                                          $this->_make_editable_field($row->Skype),
+                                          $this->_make_editable_field($row->Fax),
+                                          $this->_make_editable_field($row->Authority),
+                                          $this->_make_editable_field($row->Twitter_Blogger),
+                                          $this->_make_editable_field($row->Twitter_blogger_Followers),
+                                          $this->_make_editable_url($row->Twitter_Outlet, $Twitter_Outlet),
+                                          $this->_make_editable_field($row->Twitter_Outlet_Followers),
+                                          $this->_make_editable_url($row->Facebook, $Facebook),
+                                          $this->_make_editable_field($row->URL),
+                                          $this->_make_editable_field($row->Notes),
+                                          $this->_make_editable_field($row->import_notes),
+                                          $this->_make_editable_field($row->Estimated_Readership),
+                                          $this->_make_editable_field($row->Additional_Contacts)
                         );
                 }
 

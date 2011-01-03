@@ -2,6 +2,8 @@
 
 class Membership_model extends Model {
 
+        const table_name = 'fs_membership';
+
         // get user from database by id
         // 
         function getUser($id = '') {
@@ -49,14 +51,16 @@ class Membership_model extends Model {
                         return true;
         }
 
-        // delete this page from the database
-        // 
+        // delete user from database
+        //
         function delete($id) {
-                echo "here in delete $id";
-                echo $this->db->delete('fs_membership', array('id' => $id));
-                echo "here AFTEER in delete $id";
+                $this->db->delete(self::table_name, array('id' => $id));
         }
 
+        function save($id, $member_data) {
+            $this->db->where('id', $id);
+            $user = $this->db->update('fs_membership', $member_data); 
+        }
         
         // create a new user and save to the database
         //

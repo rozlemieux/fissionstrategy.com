@@ -12,6 +12,8 @@ class CMS extends Controller {
                 $this->is_logged_in();
         }
 
+        // security check
+        //
         function is_logged_in() {
                 $is_logged_in = $this->session->userdata('is_logged_in');
                 if(!isset($is_logged_in) || $is_logged_in != true) {
@@ -96,6 +98,12 @@ class CMS extends Controller {
             $r .= '<a title="Open full editor" href="' . $link . '">';
             $r .= '<img src="/img/comment_edit.png" /></a>';
             return $r;
+        }
+
+        // make a url editable
+        function _make_editable_url($name, $url) {
+            // umm, do nothing for now
+            return $url;
         }
 
         // make this an editable cell in the grid
