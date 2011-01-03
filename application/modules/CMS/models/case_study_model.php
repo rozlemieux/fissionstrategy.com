@@ -111,7 +111,8 @@ class Case_study_model extends Model {
                 if (isset($changes['new']))
                         $this->new = ($changes['new'] == '') ? 'Y' : 'N';
 
-                $this->status = $changes['status'];
+                if (isset($changes['status']))
+                    $this->status = $changes['status'];
 
                 $this->db->where('id', $this->id);
                 $this->db->update(self::table_name, $this);

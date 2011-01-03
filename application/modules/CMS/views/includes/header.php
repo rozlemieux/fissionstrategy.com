@@ -19,21 +19,40 @@
   </head>
 
   <body>
+    <?php // lightbox and edit_popup are used for the ajax editing of the grid ?>
     <div id="lightbox"></div>
-    <div class="wrapper">
-     <div class="header">
+    <div id="edit_popup" style="display: none;" >
+      <form action="edit_field">
+        <input id="edit_id" name="edit_id" type="hidden" value="" />
+        <input id="field_name" name="field_name" type="hidden" value="" />
+
+        <div id="popup_who"></div>
+        <div>
+          <div class="popup_label">Editing: <span id="popup_title"></span></div>
+          <div><textarea type="text" name="value" id="popup_value" /></textarea></div>
+        <div id="popup_extra"></div>
+      </div>
+      <div class="popup_buttons">
+        <div id="save" style="float: right" class="popup_button">Save</div>
+        <div id="cancel" class="popup_button">Cancel</div>
+      </div>
+    </form>
+  </div>
+  <div class="wrapper">
+    <div class="header">
        <a href="/" class="logo"></a>
        <?php if( $this->session && $this->session->userdata('username') ) {    ?>
        <div id="logout">
           <h4>Welcome back <strong><?php echo $this->session->userdata('username'); ?></strong>&nbsp;-&nbsp;<?php echo anchor('/CMS/login/logout', 'Logout'); ?></h4>
        </div>                                                                               
        <?php } ?>
-
+                                                                               
        <div class="navigation">
          <ul>
           <li <?php echo is_current($menu_highlight, 'Blog'); ?>><a href="/CMS/blog">Blog</a></li>
           <li <?php echo is_current($menu_highlight, 'Blogger'); ?>><a href="/CMS/blogger">Bloggers</a></li>
           <li <?php echo is_current($menu_highlight, 'Case Studies'); ?>><a href="/CMS/case_study">Case Studies</a></li>
+          <li <?php echo is_current($menu_highlight, 'Events'); ?>><a href="/CMS/events">Events</a></li>
           <li <?php echo is_current($menu_highlight, 'Team'); ?>><a href="/CMS/team">Team</a></li>
           <li <?php echo is_current($menu_highlight, 'Pages'); ?>><a href="/CMS/page">Pages</a></li>
  	  <li <?php echo is_current($menu_highlight, 'Links'); ?>><a href="/CMS/links">Links</a></li>

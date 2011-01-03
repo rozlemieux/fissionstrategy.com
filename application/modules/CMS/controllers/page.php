@@ -66,6 +66,20 @@ class Page extends CMS {
 		}
         }
 
+        // ajax call to update one field (called from grid / dashboard)
+        function update_field() {
+            $id = $this->input->post('edit_id');
+            $field = $this->input->post('field_name');
+            $value = $this->input->post($field) ? $this->input->post($field) : $this->input->post('value');
+
+            $team = new Page_model();
+            $team = $team->get_from_id($id);
+            $team->$field = $value;
+            $team->save(null);
+            
+            echo $value;
+        }
+
         // ajax call from flexigrid to populate rows
         //
         function ajax_load_pages() {
@@ -82,10 +96,10 @@ class Page extends CMS {
                 foreach ($records['records']->result() as $row)	{
                         if ($row->name == '') $row->name = 'Name';
                         $record_items[] = array($row->id,
-                                          '<a title="Edit" href="/CMS/page/edit/' . $row->id . '">' . $row->id . '</a>',
-                                          $row->status,
-                                          $row->menu,
-                                          '<a title="Edit" href="/CMS/page/edit/' . $row->id . '">' . $row->title . '</a>',
+                                          $this->_make_action_field($row->id, "/CMS/page/edit/" . $row->id),
+                                          $this->_make_editable_field($row->menu),
+                                          $this->_make_editable_field($row->title),
+                                          $this->_make_editable_select($row->status),
                                           $this->truncate(strip_tags($row->content), 60, $break=".", $pad="..."),
                                           $row->name
                         );
@@ -109,9 +123,9 @@ class Page extends CMS {
                 // NOTE: this order has to match the records in ajax_load_page()
                 //
                 $colModel['id'] = array('id',40,TRUE,'center',2);
-                $colModel['status'] = array('Status',40,TRUE,'left',2);
                 $colModel['menu'] = array('page',80,TRUE,'left',2);
                 $colModel['title'] = array('Title',200,TRUE,'left',2);
+                $colModel['status'] = array('Status',40,TRUE,'left',2);
                 $colModel['content'] = array('Content',478,TRUE,'left',2);
                 $colModel['name'] = array('name',40,TRUE,'left',2);
 		

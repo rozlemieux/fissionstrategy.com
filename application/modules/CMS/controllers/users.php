@@ -3,6 +3,7 @@
 require_once 'cms.php';
 
 class Users extends CMS {
+
         function __construct() {
                 parent::__construct();
         }
@@ -16,15 +17,6 @@ class Users extends CMS {
                 $data['page_title'] = "CMS Users";
                 $data['main_content'] = 'dashboard';
                 $this->load->view('includes/template', $data);		
-        }
-
-        // security check
-        //
-        function is_logged_in() {
-                $is_logged_in = $this->session->userdata('is_logged_in');
-                if(!isset($is_logged_in) || $is_logged_in != true) {
-                        redirect('/CMS/login');
-                }		
         }
 
         // responds to clicking the edit column on a row in the grid
@@ -47,18 +39,18 @@ class Users extends CMS {
                 $this->load->view('includes/template', $data);
         }
 
-
         // responds to clicking the delete button when a row or rows are selected in the grid
         // 
         function delete() {
-		$ids = explode(',', $_POST['items']);
-                $this->load->model('membership_model');
+            $ids = explode(',', $_POST['items']);
 
-		foreach ($ids as $i => $id) {
-                        if ($id) {
-                                $this->membership_model->delete($id);
-                        }
-		}
+            $this->load->model('membership_model');
+            $user = new membership_model();
+            foreach ($ids as $i => $id) {
+                if ($id) {
+		    $user->delete($id);
+                }
+            }
         }
 
         // Responds to the New user button on the dashboard page
@@ -146,6 +138,19 @@ class Users extends CMS {
                 return TRUE;
         }
 	
+        // ajax call to update one field (called from grid / dashboard)
+        function update_field() {
+            $id = $this->input->post('edit_id');
+            $field = $this->input->post('field_name');
+            $value = $this->input->post($field) ? $this->input->post($field) : $this->input->post('value');
+
+            $this->load->model('membership_model');
+            $fields = array($field => $value);
+            $this->membership_model->save($id, $fields);
+            
+            echo $value;
+        }
+
         // ajax call from flexigrid to populate rows
         //
         function ajax_load_users() {
@@ -170,12 +175,12 @@ class Users extends CMS {
                                 $avatar = $row->avatar;
 
                         $record_items[] = array($row->id,
-                                          $row->id,
+                                          $this->_make_action_field($row->id, "/CMS/users/edit_user/" . $row->id),
                                           $avatar,
-                                          "<a href='/CMS/users/edit_user/{$row->id}'>{$row->username}</a>",
-                                          $row->first_name,
-                                          $row->last_name,
-                                          $row->email_address
+                                          $this->_make_editable_field($row->username),
+                                          $this->_make_editable_field($row->first_name),
+                                          $this->_make_editable_field($row->last_name),
+                                          $this->_make_editable_field($row->email_address)
                         );
                 }
 

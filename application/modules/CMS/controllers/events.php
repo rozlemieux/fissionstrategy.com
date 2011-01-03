@@ -1,25 +1,27 @@
 <?php
 
-require_once 'site.php';
+require_once 'cms.php';
 
-class Events extends Site {
+class Events extends CMS {
 	
     function __construct()    {
         parent::Controller();
 
-        $this->_get_sidebar_data();
-        $this->load->module_model('CMS', 'Events_model');
+        $this->load->model('Events_model');
+        $this->data['menu_highlight'] = "Events";
     }
 
     // display a list of all events
     //
     function index() {
+        $this->calendar();
+        return;
 
         $events = $this->Events_model->get();
         $this->data['events'] = $events;
-        $this->data['page_title'] = "Fission Strategy: Events";
+        $this->data['page_title'] = "Events";
         $this->data['main_content'] = 'events';
-        $this->load->view('includes/template_sidebar', $this->data);		
+        $this->load->view('includes/template', $this->data);		
     }
 
     // display a single event
@@ -27,9 +29,9 @@ class Events extends Site {
     function event($id) {
         $events = $this->Events_model->get($id);
         $this->data['events'] = $events;
-        $this->data['page_title'] = "Fission Strategy: Events";
+        $this->data['page_title'] = "Events";
         $this->data['main_content'] = 'events';
-        $this->load->view('includes/template_sidebar', $this->data);		
+        $this->load->view('includes/template', $this->data);		
     }
 
     // Displays a calendar view
@@ -50,8 +52,8 @@ class Events extends Site {
         }
 		
         $this->data['calendar'] = $this->Events_model->generate($year, $month);
-        $this->data['page_title'] = "Fission Strategy: Events";
+        $this->data['page_title'] = "Events";
         $this->data['main_content'] = 'events';
-        $this->load->view('includes/template_sidebar', $this->data);		
+        $this->load->view('includes/template', $this->data);		
     }
 }
