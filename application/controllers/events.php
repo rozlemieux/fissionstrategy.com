@@ -48,6 +48,10 @@ class Events extends Site {
     //
     function calendar($year = null, $month = null) {
 
+        // get all events for this month
+        if ($month && $year)
+            $this->data['events'] = $this->Events_model->get($id, 0, $year, $month);
+
         $this->data['calendar'] = $this->_get_calendar($year, $month);
         $this->data['page_title'] = "Fission Strategy: Events";
         $this->data['main_content'] = 'events';
