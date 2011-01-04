@@ -40,7 +40,7 @@
     <body>
 
       <div class="wrapper">
-        <a href="http://smsadvocacy.com" target="_blank"><img id="sms-advocacy" src="/sms.jpg"></a>
+        <a href="http://smsadvocacy.com" id="sms-advocacy" target="_blank"></a>
 	<div class="header">
 	  <a href="/" class="logo"></a>
 

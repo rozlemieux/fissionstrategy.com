@@ -1,5 +1,6 @@
-<div class="content">
-  <div id="contact_form">
+<div class="main">
+  <div class="content">
+    <div id="contact_form">
 
     <h1>Contact Us</h1>
     <?php 
@@ -25,8 +26,8 @@
      echo form_close();
     ?>
 
+    </div>
   </div>
-</div>
 
 <script>
 jQuery(document).ready(function() { 
@@ -53,3 +54,4 @@ jQuery(document).ready(function() {
 
 });
 
+</script>

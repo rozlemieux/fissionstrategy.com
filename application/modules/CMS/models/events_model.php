@@ -62,14 +62,19 @@ class Events_model extends Model {
 
     // gets the specified event or the list of all events
     //
-    function get($id = null, $limit = 0) {
+    function get($id = null, $limit = 0, $year = null, $month = null) {
         
         $this->db->select('id, title, date, description')->from('fs_events');
         if ($id)
             $this->db->where('id', $id);
         if ($limit)
             $this->db->limit($limit);
-        $this->db->orderby('id', 'desc');
+
+        if ($year && $month) {
+            $this->db->like('date', "$year-$month", 'after');
+            $this->db->orderby('id', 'asc');
+        }
+        else $this->db->orderby('id', 'desc');
 
         $query = $this->db->get();
         $event_data = array();
@@ -144,7 +149,7 @@ class Events_model extends Model {
 
             $event = '<a href="' . $url . '">' . $row->description . '</a>';
             if ($small)
-                $event = '<a href="/' . $url . '" style="float:left;width:30px;height:10px;background-color: green"></a>';
+                $event = '<a href="' . $url . '" style="float:left;width:30px;height:10px;background-color: green"></a>';
 
             if (isset($cal_data[substr($row->date,8,2) + 0]))
                 $cal_data[substr($row->date,8,2) + 0] .= $event;

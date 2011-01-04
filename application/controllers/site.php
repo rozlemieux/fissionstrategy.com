@@ -32,7 +32,7 @@ class Site extends Controller {
 
             $this->data['page_title'] = "Fission Strategy";
             $this->data['main_content'] = 'new_homepage';
-            $this->load->view('includes/template', $this->data);		
+            $this->load->view('new_homepage', $this->data);		
         }
 
         // get the data for the sidebar
