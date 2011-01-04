@@ -1147,12 +1147,14 @@ form input.submit {
 }
 
 table.calendar {
-	margin: auto; border-collapse: collapse;
+	border-collapse: collapse;
+        float: right;
+        margin: 0 40px;
 }
 
 .calendar .days td {
 	color: #7fc41c;	
-	width: 80px; height: 80px; padding: 4px;
+	width: 10px; height: 10px; padding: 0px;
 	border: 1px solid #999;
 	vertical-align: top;
 	background-color: #efefef;
@@ -1166,9 +1168,9 @@ table.calendar {
 	font-weight: bold; color: #000;
 }
 
-.NOTcalendar .day_num {
+.calendar .day_num {
     float: left;
-    width: 20px;
+    width: 30px;
 }
 
 .calendar .cell_content {
@@ -1230,3 +1232,31 @@ table.calendar {
        cursor: pointer;
 }
 
+.events_slider {
+    float: left;
+    width: 700px;
+    height: 60px;
+    overflow:hidden;
+    cursor: pointer;
+}
+
+.events_slider ul {
+    width: 4000px;
+    list-style-position: inside;
+    position: relative;
+    z-index: 1;
+    list-style: none outside none;
+    margin: 0;
+    padding: 0;
+}
+
+.events_slider ul li {
+    overflow: hidden;
+    width: 680px;
+    padding: 0 10px;
+    float: left;
+}
+
+.events_slider ul li a {
+    color: #339977;
+}

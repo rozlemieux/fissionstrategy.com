@@ -481,4 +481,24 @@ form .popup_button {
     z-index: 3000;
 }
 
+table.calendar {
+  margin: auto; 
+  border-collapse: collapse;
+  float: none;
+}
+
+table.calendar .day_num {
+    float: none;
+    cursor: pointer;
+}
+
+.calendar .days td {
+	color: #7fc41c;	
+	width: 80px; height: 80px; padding: 4px;
+	border: 1px solid #999;
+	vertical-align: top;
+	background-color: #efefef;
+}
+
+
 

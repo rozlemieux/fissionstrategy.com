@@ -8,6 +8,7 @@ class Events extends CMS {
         parent::Controller();
 
         $this->load->model('Events_model');
+        $this->Events_model->set_config('CMS/events/calendar', true);
         $this->data['menu_highlight'] = "Events";
     }
 
@@ -28,6 +29,17 @@ class Events extends CMS {
     //
     function event($id) {
         $events = $this->Events_model->get($id);
+
+        $this->_build_calendar();
+        $this->load->helper('ckeditor');
+        $this->data['ckeditor'] = array('id' => 'content', 
+                            'path'	=> '/public/js/ckeditor', 
+                            'config' => array(
+                                'toolbar' 	=> 	"CMS_Full", 
+                                'width' 	=> 	"662px",
+                                'height' 	=> 	'600px'
+                            ));
+
         $this->data['events'] = $events;
         $this->data['page_title'] = "Events";
         $this->data['main_content'] = 'events';

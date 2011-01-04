@@ -3,9 +3,9 @@
     <h1>Events</h1>
 
     <?php 
-     if ($calendar)
+     if ($calendar) 
          echo $calendar; 
-     
+
      if ($events) {
          foreach ($events as $i => $event) {
              if (strpos($event->date, '00:00:00') > 0)
