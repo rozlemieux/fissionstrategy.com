@@ -23,6 +23,18 @@ class Site extends Controller {
                 $this->load->view('includes/template', $this->data);		
         }
 
+        function test_homepage() {
+            $this->_get_sidebar_data();
+
+            $this->load->module_model('CMS', 'Events_model');
+            $events = array_reverse($this->Events_model->get(0, 4));
+            $this->data['events'] = $events;
+
+            $this->data['page_title'] = "Fission Strategy";
+            $this->data['main_content'] = 'new_homepage';
+            $this->load->view('includes/template', $this->data);		
+        }
+
         // get the data for the sidebar
         // this data is used in either the sidebar of every page, or on the homepage directly
         //

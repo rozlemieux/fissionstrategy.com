@@ -2,17 +2,17 @@
 class Events_model extends Model {
 	
     var $conf;
-	
+    var $CMS;
+
     function Events_model () {
         parent::Model();
 		
         // set some config options (these should be moved to /config
         $this->conf = array(
-            'start_day' => 'monday',
+            'start_day' => 'sunday',
             'show_next_prev' => true,
-            'next_prev_url' => base_url() . 'CMS/events/calendar'
         );
-		
+
         // the calendar library class uses templates, here is our default template
         //
         $this->conf['template'] = '
@@ -55,13 +55,20 @@ class Events_model extends Model {
 		
     }
 	
+    function set_config($url, $CMS = false) {
+        $this->conf['next_prev_url'] = base_url() . $url;
+        $this->CMS = $CMS;
+    }
+
     // gets the specified event or the list of all events
     //
-    function get($id = null) {
+    function get($id = null, $limit = 0) {
         
         $this->db->select('id, title, date, description')->from('fs_events');
         if ($id)
             $this->db->where('id', $id);
+        if ($limit)
+            $this->db->limit($limit);
         $this->db->orderby('id', 'desc');
 
         $query = $this->db->get();
@@ -69,44 +76,6 @@ class Events_model extends Model {
 		
         foreach ($query->result() as $row) {
             $event_data[$row->id] = $row;
-        }
-        return $event_data;
-    }
-
-    // used to originally import from old database
-    function fixup() {
-        $this->db->select('id, title, date, description')->from('fs_events');
-        if ($id)
-            $this->db->where('id', $id);
-        
-        $query = $this->db->get();
-        $event_data = array();
-		
-        foreach ($query->result() as $row) {
-            $title = $row->title;
-
-            $repeat_start = 0;
-            $repeat_end = 0;
-            $repeat = 0;
-            if (strpos($title, '-') > 0) {
-                $date = substr($title, 0, strpos($title, '-'));
-                $date .= substr($title, strpos($title, ','));
-                $start = strpos($title, ' ');
-                $repeat_start = substr($title, $start, strpos($title, '-') - $start);
-                $start = strpos($title, '-') + 1;
-                $repeat_end = substr($title, $start, strpos($title, ',') - $start);
-            }
-            else $date = $title;
-
-            $date = date( 'y-m-d', strtotime($date));
-            $repeat = $repeat_end - $repeat_start;
-
-            $this->db->where('id', $row->id)
-                ->update('fs_events', array('date' => $date . ' 00:00:00'));
-            $this->db->where('id', $row->id)
-                ->update('fs_events', array('repeat' => $repeat));
-
-            $event_data[] = $row;
         }
         return $event_data;
     }
@@ -150,17 +119,33 @@ class Events_model extends Model {
         return $this->calendar->generate($year, $month, $cal_data);
     }
 	
+    // generates a small calender view with the events filled in
+    //
+    function generate_small ($year, $month) {
+		
+        $this->load->library('calendar', $this->conf);
+        $cal_data = $this->_get_calendar_data($year, $month, true);
+		
+        return $this->calendar->generate($year, $month, $cal_data);
+    }
+	
     // this fetches the events for the given year/month and merges them in with the month
     // info to generate a calendar page
-    function _get_calendar_data($year, $month) {
-		
+    function _get_calendar_data($year, $month, $small = false) {
+
         $query = $this->db->select('id, date, title, description')->from('fs_events')
             ->like('date', "$year-$month", 'after')->get();
 
         $cal_data = array();
 		
         foreach ($query->result() as $row) {
-            $event = '<a href="/events/event/' . $row->id . '">' . $row->description . '</a>';
+            $url = ($this->CMS) ? '/CMS/events/event/' : '/events/event/';
+            $url .= $row->id;
+
+            $event = '<a href="' . $url . '">' . $row->description . '</a>';
+            if ($small)
+                $event = '<a href="/' . $url . '" style="float:left;width:30px;height:10px;background-color: green"></a>';
+
             if (isset($cal_data[substr($row->date,8,2) + 0]))
                 $cal_data[substr($row->date,8,2) + 0] .= $event;
             else 

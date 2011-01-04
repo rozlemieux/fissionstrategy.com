@@ -35,7 +35,7 @@ $(document).ready(function() {
                 return false;
             });
 
-	$('.calendar .day').click(function() {
+	$('.calendar .day_num').click(function() {
                 day_num = $(this).find('.day_num').html();
                 day_data = prompt('Enter Stuff', $(this).find('.content').html());
                 if (day_data != null) {

@@ -1,5 +1,7 @@
 // JavaScript Document
 
+var rotation_interval = 4000;
+
 jQuery(document).ready(function()
 {
 	jQuery(".team").each(function()
@@ -89,4 +91,37 @@ jQuery(document).ready(function()
 			return false;
 		});
 	});
+
+        setTimeout ("rotate_images()", rotation_interval);
 });
+
+var rotate = 0;
+var last_event = 3 * 700;
+
+function rotate_images() {
+    rotate = (rotate < last_event) ? rotate + 700 : 0
+    var delay = 1500;
+
+    if (rotate) {
+        $('.events_slider ul').animate({left: 0 - rotate}, 
+            delay, 
+            function() { 
+                setTimeout ("rotate_images()", rotation_interval); 
+            } 
+        );
+    }
+    else {
+        $('.events_slider ul').fadeOut(1000, 
+            function() { 
+                $('.events_slider ul').animate({left: 0 - rotate}, 
+                    0, 
+                    function() {
+                        $('.events_slider ul').show('fast'); 
+                        setTimeout ("rotate_images()", rotation_interval); 
+                    } 
+                );
+            } 
+        );
+    }
+}
+
