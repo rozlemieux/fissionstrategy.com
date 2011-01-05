@@ -59,6 +59,24 @@ class Case_study_model extends Model {
                 return $case_studies;
         }
 
+        // get a quote for the homepage or sidebar rotating quotes
+        // 
+        function get_quote($offset) {
+
+                $this->db->select('id, quote, author');
+                $this->db->where("status = 'publish' and quote != ''");
+                $this->db->from(self::table_name);
+                $limit = 1;
+                $this->db->limit($limit, $offset);
+                $query = $this->db->get();
+                foreach ($query->result() as $c) {
+                    $c->order = $offset;
+                    return $c;
+                }
+
+                return null;
+        }
+
         // get total rows
         //
         function get_num() {

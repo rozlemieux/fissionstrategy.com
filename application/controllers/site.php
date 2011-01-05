@@ -23,12 +23,28 @@ class Site extends Controller {
                 $this->load->view('includes/template', $this->data);		
         }
 
+        function get_quote() {
+            $offset = $_POST['quote_offset'];
+            $this->load->module_model('CMS', 'case_study_model');
+            $case_study = $this->case_study_model->get_quote($offset);
+            echo $case_study->quote . '<div class="author">' . $case_study->author . '</div>';
+            echo '<br/><a href="' . $this->config->item('base_url') . 'projects/preview/';
+            echo $case_study->id . '" class="more">meet more of our clients</a>';
+            return;
+        }
+
         function test_homepage() {
-            $this->_get_sidebar_data();
+            $this->_test_get_sidebar_data();
 
             $this->load->module_model('CMS', 'Events_model');
             $events = array_reverse($this->Events_model->get(0, 4));
             $this->data['events'] = $events;
+
+            $this->load->module_model('CMS', 'case_study_model');
+            $case_study = $this->case_study_model->get_quote(0);
+            $this->data['quote'] = $case_study->quote;
+            $this->data['author'] = $case_study->author;
+            $this->data['quote_order'] = $case_study->order;
 
             $this->data['page_title'] = "Fission Strategy";
             $this->data['main_content'] = 'new_homepage';
@@ -55,5 +71,27 @@ class Site extends Controller {
                 $info = $this->page_model->get_page('homepage');
                 $this->data['author'] = $info->title;
                 $this->data['quote'] = $info->content;
+        }
+
+        function _test_get_sidebar_data() {
+
+                // get case studies
+                $this->load->module_model('CMS', 'case_study_model');
+                $this->data = array();
+                $this->data['case_studies'] = $this->case_study_model->get();
+
+                // get the latest blog
+                $this->load->module_model('CMS', 'blog_model'); 
+                $latest_blog = $this->blog_model->get('', 1);
+                $this->data['latest_blog'] = reset($latest_blog);
+
+                // replaced by rotating quote block
+                if (0) {
+                    // get the quote
+                    $this->load->module_model('CMS', 'page_model'); 
+                    $info = $this->page_model->get_page('homepage');
+                    $this->data['author'] = $info->title;
+                    $this->data['quote'] = $info->content;
+                }
         }
 }

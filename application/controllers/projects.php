@@ -32,8 +32,8 @@ class Projects extends Site {
                 // get case studies
                 $this->load->module_model('CMS', 'case_study_model');
                 $this->data = array();
-                $this->data['case_studies'] = $this->case_study_model->get('', 15, $page * 15, 0, $preview);
-                $this->data['pages'] = floor($this->case_study_model->get_num() / 15) + 1;
+                $this->data['case_studies'] = $this->case_study_model->get('', 100, $page * 100, 0, $preview);
+                $this->data['pages'] = floor($this->case_study_model->get_num() / 100) + 1;
                 $this->data['page'] = $page;
                 $this->data['preview'] = $preview;
 

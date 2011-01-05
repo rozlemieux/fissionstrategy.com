@@ -92,13 +92,15 @@ jQuery(document).ready(function()
 		});
 	});
 
-        setTimeout ("rotate_images()", rotation_interval);
+        setTimeout ("rotate_events()", rotation_interval);
+        if (typeof(quote_order) !== 'undefined')
+            setTimeout ("rotate_quote()", rotation_interval + 1000);
 });
 
 var rotate = 0;
 var last_event = 3 * 700;
 
-function rotate_images() {
+function rotate_events() {
     rotate = (rotate < last_event) ? rotate + 700 : 0
     var delay = 1500;
 
@@ -106,7 +108,7 @@ function rotate_images() {
         $('.events_slider ul').animate({left: 0 - rotate}, 
             delay, 
             function() { 
-                setTimeout ("rotate_images()", rotation_interval); 
+                setTimeout ("rotate_events()", rotation_interval); 
             } 
         );
     }
@@ -117,11 +119,36 @@ function rotate_images() {
                     0, 
                     function() {
                         $('.events_slider ul').show('fast'); 
-                        setTimeout ("rotate_images()", rotation_interval); 
+                        setTimeout ("rotate_events()", rotation_interval); 
                     } 
                 );
             } 
         );
     }
+}
+
+var quote_rotation_interval = 8000;
+
+function rotate_quote() {
+
+    $('#quote').fadeOut(2000, function() { 
+            $.ajax({
+                url: "/site/get_quote",
+                        type: 'POST',
+                        data: { quote_offset: quote_order},
+                        success: function(msg) {
+                        $('#quote').html(msg);
+                        quote_order++;
+                        if (quote_order > max_quotes)
+                            quote_order = 0;
+                        $('#quote').fadeIn(2000, function() {
+                                setTimeout ("rotate_quote()", quote_rotation_interval); }); 
+                    },
+                        failure: function(msg) {
+                        setTimeout ("rotate_quote()", quote_rotation_interval);
+
+                    }
+                });
+        });
 }
 

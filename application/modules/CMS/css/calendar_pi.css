@@ -3,14 +3,12 @@
 	background-color: transparent;
 }
 .calheading {
-	background-color: #7fc41c;
 	font-family: Lucida Grande, Verdana, Geneva, Sans-serif;
 	font-size: 11px;
 	font-weight: bold;
 	text-align: center;
 }
 .calnavleft {
-	background-color: #7fc41c;
 	font-family: Lucida Grande, Verdana, Geneva, Sans-serif;
 	font-size: 10px;
 	font-weight: bold;
@@ -18,7 +16,6 @@
 	cursor: pointer;
 }
 .calnavright {
-	background-color: #7fc41c;
 	font-family: Lucida Grande, Verdana, Geneva, Sans-serif;
 	font-size: 10px;
 	font-weight: bold;
@@ -36,7 +33,6 @@
 }
 .caldaycells{
 	color: #000;
-	background-color: #7fc41c;
 	font-family: Lucida Grande, Verdana, Geneva, Sans-serif;
 	font-size: 11px;
 	text-align: center;

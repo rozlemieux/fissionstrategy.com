@@ -1,8 +1,9 @@
 <?php
 class Events_model extends Model {
 	
-    var $conf;
-    var $CMS;
+    var $date = '';
+    var $title = '';
+    var $description = '';
 
     function Events_model () {
         parent::Model();
@@ -12,6 +13,10 @@ class Events_model extends Model {
             'start_day' => 'sunday',
             'show_next_prev' => true,
         );
+
+        $day_template = ($this->conf['is_CMS']) ? 
+            '<div title="create new event" class="new_event"><div class="day_num">{day}</div></div>' : 
+            '<div class="day_num">{day}</div>';
 
         // the calendar library class uses templates, here is our default template
         //
@@ -33,8 +38,8 @@ class Events_model extends Model {
 			{cal_row_start}<tr class="days">{/cal_row_start}
 			{cal_cell_start}<td class="day">{/cal_cell_start}
 			
-			{cal_cell_content}
-				<div class="day_num">{day}</div>
+			{cal_cell_content}' . $day_template . '
+				
 				<div class="cell_content">{content}</div>
 			{/cal_cell_content}
 			{cal_cell_content_today}
@@ -42,7 +47,8 @@ class Events_model extends Model {
 				<div class="cell_content">{content}</div>
 			{/cal_cell_content_today}
 			
-			{cal_cell_no_content}<div class="day_num">{day}</div>{/cal_cell_no_content}
+			{cal_cell_no_content}<div title="create new event" class="new_event">
+                                 <div class="day_num">{day}</div>{/cal_cell_no_content}</div>
 			{cal_cell_no_content_today}<div class="day_num highlight">{day}</div>{/cal_cell_no_content_today}
 			
 			{cal_cell_blank}&nbsp;{/cal_cell_blank}
@@ -57,7 +63,7 @@ class Events_model extends Model {
 	
     function set_config($url, $CMS = false) {
         $this->conf['next_prev_url'] = base_url() . $url;
-        $this->CMS = $CMS;
+        $this->conf['is_CMS'] = $CMS;
     }
 
     // gets the specified event or the list of all events
@@ -85,33 +91,45 @@ class Events_model extends Model {
         return $event_data;
     }
 
+    function get_from_id($id) {
+        
+        $this->db->select('*')->from('fs_events');
+        $this->db->where('id', $id);
+
+        $query = $this->db->get();
+		
+        foreach ($query->result() as $row)  {
+            $this->_load_from_query($row);
+            break;
+        }
+
+        return $this;
+    }
+
     // creates an event in the database
     //
-    function add_calendar_data($date, $description) {
-		
-        $this->db->insert('fs_events', array(
-                'date' => $date,
-                'description' => $description
-            ));
-        return;
-
-        // the following was to only allow one event per day
-        if ($this->db->select('date')->from('fs_events')
-            ->where('date', $date)->count_all_results()) {
-			
-            $this->db->where('date', $date)
-                ->update('fs_events', array(
-                        'date' => $date,
-                        'description' => $description			
-                    ));
-			
-        } else {
-		
-            $this->db->insert('fs_events', array(
-                    'date' => $date,
-                    'description' => $description
-                ));
+    function save($changes) {
+        if (is_array($changes)) {
+            if (isset($changes['date']))
+                $this->date = $changes['date'];
+            if (isset($changes['title'])) 
+                $this->title = $changes['title'];
+            if (isset($changes['content']))
+                $this->description = $changes['content'];
+            $this->load->helper('date');
+            //            $this->updated = mdate("%Y-%m-%d %h:%i:%a", now());
         }
+
+        if ($this->id) {
+            $this->db->where('id', $this->id);
+            $this->db->update('fs_events', $this);
+        }
+        else {
+            $this->db->insert('fs_events', $this);
+            $this->id = $this->db->insert_id();
+        }
+
+        return $this->id;
     }
 
     // generates a calender view with the events filled in
@@ -144,7 +162,7 @@ class Events_model extends Model {
         $cal_data = array();
 		
         foreach ($query->result() as $row) {
-            $url = ($this->CMS) ? '/CMS/events/event/' : '/events/event/';
+            $url = ($this->conf['is_CMS']) ? '/CMS/events/event/' : '/events/event/';
             $url .= $row->id;
 
             $event = '<a href="' . $url . '">' . $row->description . '</a>';
@@ -158,5 +176,14 @@ class Events_model extends Model {
         }
 		
         return $cal_data;
+    }
+
+    // copy database row into this object
+    //
+    function _load_from_query($c) {
+        $this->id = $c->id;
+        $this->title = $c->title;
+        $this->description = $c->description;
+        $this->date = $c->date;
     }
 }

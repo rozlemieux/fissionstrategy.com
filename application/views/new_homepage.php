@@ -131,7 +131,7 @@
              $month = date('m', strtotime($event->date));
              echo '<li><a href="/events/calendar/' . $year . '/' . $month . '">';
              echo '<b>' . date('F j', strtotime($event->date)) . $time . '</b>  --  ';
-             echo $event->description . '</a></li>';
+             echo strip_tags($event->description, '<b>') . '</a></li>';
              if ($i++ > 2) break;
            }
            ?>
@@ -168,16 +168,22 @@
 
     <div class="column">
       <h2><img src="/img/h-from-our-clients.gif" alt="from our clients" style="padding-top:7px;" /></h2>
-      <?php echo $quote; ?>
-      <div class="author">
-	<?php echo $author; ?>
+      <div id="quote"><?php echo $quote; ?>
+        <div class="author">
+  	  <?php echo $author; 
+               $quote_url =  $this->config->item('base_url') . 'projects/preview/' . $case_study->id;
+           ?>
+        </div>
+        <br/><a href="<?php echo $quote_url ?>" class="more">meet more of our clients</a>
       </div>
-      <a href="/clients/" class="more">meet more of our clients</a>
+      <script> 
+               var quote_order = '<?php echo $quote_order ?>'; 
+               var max_quotes = 8; 
+      </script>
+      
     </div>
   </div>
 </div>
-
-
 
 </div>
 </div>
