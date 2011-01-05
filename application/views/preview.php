@@ -31,7 +31,7 @@
 <script>
 jQuery(document).ready(function() { 
 
-                //                alert(" clicking <?php echo $preview ?>");
+        //alert(" clicking <?php echo $preview ?>");
        $('a[href=#slice-<?php echo $preview?>]').click();
 
 });

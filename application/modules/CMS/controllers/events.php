@@ -4,18 +4,22 @@ require_once 'cms.php';
 
 class Events extends CMS {
 	
+    const EVENTS_URL = 'CMS/events/calendar';
+
     function __construct()    {
         parent::Controller();
 
         $this->load->model('Events_model');
-        $this->Events_model->set_config('CMS/events/calendar', true);
+        $this->Events_model->set_config(self::EVENTS_URL, true);
         $this->data['menu_highlight'] = "Events";
     }
 
     // display a list of all events
     //
     function index() {
-        $this->calendar();
+        $year = date('Y');
+        $month = date('m');
+        redirect($this->config->item('base_url') . self::EVENTS_URL . "/$year/$month");
         return;
 
         $events = $this->Events_model->get();
@@ -27,8 +31,14 @@ class Events extends CMS {
 
     // display a single event
     //
-    function event($id) {
-        $events = $this->Events_model->get($id);
+    function event($id = null, $date = null) {
+        if ($id)
+            $events = $this->Events_model->get($id);
+        else {
+            $event = new Events_model();
+            $event->date = $date;
+            $events = array($event);
+        }
 
         $this->_build_calendar();
         $this->load->helper('ckeditor');
@@ -48,19 +58,16 @@ class Events extends CMS {
 
     // Displays a calendar view
     //
-    function calendar($year = null, $month = null) {
-        if (!$year) {
+    function calendar($year = null, $month = null, $day = null) {
+        if (!$year) 
             $year = date('Y');
-        }
-        if (!$month) {
-            $month = date('m');
-        }
 
-        if ($day = $this->input->post('day')) {
-            $this->Events_model->add_calendar_data(
-                "$year-$month-$day",
-                $this->input->post('data')
-            );
+        if (!$month)
+            $month = date('m');
+
+        if ($day) {
+            $this->event(null, "$year-$month-$day");
+            return 'success';
         }
 		
         $this->data['calendar'] = $this->Events_model->generate($year, $month);
@@ -68,4 +75,19 @@ class Events extends CMS {
         $this->data['main_content'] = 'events';
         $this->load->view('includes/template', $this->data);		
     }
+
+    // edit an event to the database or create new one
+    // 
+    function save() {
+
+        $id = $this->input->post('id');
+
+        $event = new Events_model();
+        if ($id) 
+            $event->get_from_id($id);
+ 
+        $id = $event->save($_POST);
+        $this->event($id);
+    }
 }
+

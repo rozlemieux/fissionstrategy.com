@@ -497,8 +497,14 @@ table.calendar .day_num {
 	width: 80px; height: 80px; padding: 4px;
 	border: 1px solid #999;
 	vertical-align: top;
-	background-color: #efefef;
+        cursor: pointer;
 }
 
+.calendar .new_event {
+    top: 0
+    left: 0
+    width: 30px; 
+    height: 20px;
+}
 
 

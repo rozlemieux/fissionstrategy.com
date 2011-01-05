@@ -18,11 +18,9 @@ echo '<div class="breadcrumbs">' . $page_title . '</div>';
          //         echo '<div style="font-size:13px">' . $event->description . "</div>";
 
          $attributes = array('id' => 'my_form', 'name' => 'my_form');
+         $hidden = array('id' => $event->id);
 
-         if ($id)
-             echo form_open_multipart("/CMS/events/edit/$id", $attributes);
-         else 
-             echo form_open_multipart('/CMS/events/new', $attributes);
+         echo form_open_multipart('/CMS/events/save/', $attributes, $hidden);
 
          $data = array('name' => 'submit','value' => 'Save changes','class' => 'submit');
          echo form_submit($data);

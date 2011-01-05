@@ -35,10 +35,13 @@ $(document).ready(function() {
                 return false;
             });
 
-	$('.calendar .day_num').click(function() {
+	$('.calendar .new_event').click(function() {
                 day_num = $(this).find('.day_num').html();
-                day_data = prompt('Enter Stuff', $(this).find('.content').html());
-                if (day_data != null) {
+                window.location.href = window.location.href + '/' + day_num;
+                return;
+
+                //                day_data = prompt('Enter Stuff', $(this).find('.content').html());
+                if (day_num != null) {
                     $.ajax({
                         url: window.location,
                                 type: 'POST',
@@ -47,8 +50,12 @@ $(document).ready(function() {
                                     data: day_data
                                     },
                                 success: function(msg) {
+                                alert(msg);
                                 location.reload();
-                            }						
+                            },
+                        failure: function(msg) {
+                                alert(msg);
+                            }
                         });
                 }
             });
