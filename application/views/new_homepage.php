@@ -118,8 +118,9 @@
       <img style="float: left; margin-right: 10px;" alt="we help organizations inspire social good through social media" src="/img/we-help-organizations.gif">
     </a>
   </div>
-  <div style="margin-top: 40px;">
-     <div style="width=300px;float:right"><- See us at these upcoming events</div>
+  <?php $display_events = ($events) ? 'block' : 'none'; ?>
+  <div style="margin-top: 40px;display:<?php echo $display_events ?>">
+     <div style="width=300px;float:right"><img src="/img/events-see-us.gif" /></div>
      <div class="events_slider">
          <ul>
            <?php 
@@ -131,11 +132,12 @@
              $month = date('m', strtotime($event->date));
              echo '<li><a href="/events/calendar/' . $year . '/' . $month . '">';
              echo '<b>' . date('F j', strtotime($event->date)) . $time . '</b>  --  ';
-             echo strip_tags($event->description, '<b>') . '</a></li>';
+             echo strip_tags($event->title, '<b>') . '</a></li>';
              if ($i++ > 2) break;
            }
            ?>
         </ul>
+        <script type="text/javascript">var total_events = '<?php echo ($i - 1) ?>';</script>
      </div>
   </div>
   <div class="triple" style="padding-top:20px;">

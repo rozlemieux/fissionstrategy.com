@@ -98,10 +98,11 @@ jQuery(document).ready(function()
 });
 
 var rotate = 0;
-var last_event = 3 * 700;
+
+var event_width = 700;
 
 function rotate_events() {
-    rotate = (rotate < last_event) ? rotate + 700 : 0
+    rotate = (rotate < (event_width * total_events)) ? rotate + 700 : 0
     var delay = 1500;
 
     if (rotate) {

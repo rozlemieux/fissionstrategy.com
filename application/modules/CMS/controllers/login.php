@@ -13,6 +13,7 @@ class Login extends Controller {
     function index() {
         $this->data['page_title'] = $this->config->item('site_name') . ": Login";
         $this->data['main_content'] = 'login_form';
+        $this->data['redirect'] = '/CMS/blog';
         $this->load->view('includes/template', $this->data);		
     }
 	
@@ -35,7 +36,7 @@ class Login extends Controller {
             if ($this->input->post('redirect')) 
                 redirect($this->input->post('redirect'));
             else 
-                redirect('CMS');
+                redirect('/CMS/blog');
         }
         else {  // incorrect username or password
             $this->data['error'] = "Incorrect username or password";

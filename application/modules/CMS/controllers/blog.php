@@ -86,7 +86,7 @@ class Blog extends CMS {
                 $this->load->library('flexigrid');
 
                 // sortable fields
-                $valid_fields = array('id', 'title', 'status', 'author', 'name',  'date', 'modified');
+                $valid_fields = array('bid', 'thumb', 'title', 'status', 'author', 'name',  'date', 'modified');
                 $this->flexigrid->validate_post('id', $valid_fields);
                 $records = $this->grid_model->get_blog();
                 $this->output->set_header($this->config->item('json_header'));

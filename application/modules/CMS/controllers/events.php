@@ -66,7 +66,7 @@ class Events extends CMS {
             $month = date('m');
 
         if ($day) {
-            $this->event(null, "$year-$month-$day");
+            $this->event(null, "$year-$month-$day 00:00:00");
             return 'success';
         }
 		

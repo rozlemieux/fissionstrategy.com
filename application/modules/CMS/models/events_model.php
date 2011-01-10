@@ -68,7 +68,7 @@ class Events_model extends Model {
 
     // gets the specified event or the list of all events
     //
-    function get($id = null, $limit = 0, $year = null, $month = null) {
+    function get($id = null, $limit = 0, $year = null, $month = null, $day = null) {
         
         $this->db->select('id, title, date, description')->from('fs_events');
         if ($id)
@@ -76,11 +76,17 @@ class Events_model extends Model {
         if ($limit)
             $this->db->limit($limit);
 
+        // SELECT * FROM `fs_events` WHERE DATE(date) > DATE('2011-01-01') order by DATE(date) asc
+
         if ($year && $month) {
-            $this->db->like('date', "$year-$month", 'after');
-            $this->db->orderby('id', 'asc');
+            // must be getting all future events from this day
+            if ($day) 
+                $this->db->where("DATE(date) >= DATE('$year-$month-$day')");
+            else 
+                $this->db->like('date', "$year-$month", 'after');
+            $this->db->orderby('DATE(date)', 'asc');
         }
-        else $this->db->orderby('id', 'desc');
+        else $this->db->orderby('date', 'desc');
 
         $query = $this->db->get();
         $event_data = array();
@@ -110,8 +116,10 @@ class Events_model extends Model {
     //
     function save($changes) {
         if (is_array($changes)) {
-            if (isset($changes['date']))
-                $this->date = $changes['date'];
+            if (isset($changes['date'])) {
+                $date = date("Y-m-d H:i:s", strtotime($changes['date']));
+                $this->date = $date;
+            }
             if (isset($changes['title'])) 
                 $this->title = $changes['title'];
             if (isset($changes['content']))
