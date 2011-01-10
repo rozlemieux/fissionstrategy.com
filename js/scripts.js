@@ -92,7 +92,8 @@ jQuery(document).ready(function()
 		});
 	});
 
-        setTimeout ("rotate_events()", rotation_interval);
+        if (typeof(total_events) !== 'undefined')
+            setTimeout ("rotate_events()", rotation_interval);
         if (typeof(quote_order) !== 'undefined')
             setTimeout ("rotate_quote()", rotation_interval + 1000);
 });
