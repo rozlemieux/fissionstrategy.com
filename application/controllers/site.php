@@ -27,7 +27,9 @@ class Site extends Controller {
             $offset = $_POST['quote_offset'];
             $this->load->module_model('CMS', 'case_study_model');
             $case_study = $this->case_study_model->get_quote($offset);
-            echo $case_study->quote . '<div class="author">' . $case_study->author . '</div>';
+            $url = $this->config->item('base_url') . 'projects/preview/' . $case_study->id;
+            $quote = $this->_truncate(strip_tags($case_study->quote), 100, $break=" ", $pad="...", $url);
+            echo $quote . '<div class="author">' . $case_study->author . '</div>';
             echo '<br/><a href="' . $this->config->item('base_url') . 'projects/preview/';
             echo $case_study->id . '" class="more">meet more of our clients</a>';
             return;
@@ -37,12 +39,14 @@ class Site extends Controller {
             $this->_test_get_sidebar_data();
 
             $this->load->module_model('CMS', 'Events_model');
-            $events = array_reverse($this->Events_model->get(0, 4));
+            $events = $this->Events_model->get(0, 4, date('Y'), date('m'), date('d'));
             $this->data['events'] = $events;
 
             $this->load->module_model('CMS', 'case_study_model');
             $case_study = $this->case_study_model->get_quote(0);
-            $this->data['quote'] = $case_study->quote;
+            $url = $this->config->item('base_url') . 'projects/preview/' . $case_study->id;
+            $quote = $this->_truncate(strip_tags($case_study->quote), 100, $break=" ", $pad="...", $url);
+            $this->data['quote'] = $quote;
             $this->data['author'] = $case_study->author;
             $this->data['quote_order'] = $case_study->order;
 
@@ -93,5 +97,20 @@ class Site extends Controller {
                     $this->data['author'] = $info->title;
                     $this->data['quote'] = $info->content;
                 }
+        }
+
+        // common function to truncate strings
+        //
+        function _truncate($string, $limit, $break=".", $pad="...", $url) {
+
+                if(strlen($string) <= $limit) return $string;
+
+                if (false !== ($breakpoint = strpos($string, $break, $limit))) {
+                        if($breakpoint < strlen($string) - 1) {
+                                $string = substr($string, 0, $breakpoint) . '&nbsp<a href="' . $url . '">' . $pad . '</a>';
+                        }
+                }
+    
+                return $string;
         }
 }

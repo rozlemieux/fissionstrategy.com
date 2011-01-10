@@ -240,7 +240,10 @@
 								$('tr',this.bDiv).each (
 									function ()
 										{
-										$('td:visible div:eq('+n+')',this).css('width',nw);
+                                                                                    // $('td:visible div:eq('+n+')',this).css('width',nw);
+                                                                                    // added by cindy - replaced above line with following two
+                                                                                    var td = $('td:visible:eq('+n+')',this);
+                                                                                    $('div:eq(0)',td).css('width',nw);
 										}
 								);
 								this.hDiv.scrollLeft = this.bDiv.scrollLeft;

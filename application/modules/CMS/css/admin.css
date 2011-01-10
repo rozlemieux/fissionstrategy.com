@@ -198,8 +198,8 @@ form input {
 }
 
 .flexigrid div.hDiv th, .flexigrid div.bDiv td {
-    border-left: 1px solid #c9a478;
-    border-right: 1px solid #c9a478;
+    border-left: 1px solid green;
+    border-right: 1px solid green;
 }
 
 .flexigrid div.sDiv{
@@ -254,7 +254,7 @@ form input {
 #login_form {
         background-color: #e5e5e5;
 	width: 400px;
-        height: 240px;
+        height: 300px;
 	border: 1px solid #1f4104;
 	margin: 150px auto 200px;
 	padding: 1em;

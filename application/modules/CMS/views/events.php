@@ -7,16 +7,9 @@ echo '<div class="breadcrumbs">' . $page_title . '</div>';
      
      if ($events) {
 
-         echo js_calendar_script('my_form');  
+         //         echo js_calendar_script('my_form');  
 
          $event = reset($events);
-         if (strpos($event->date, '00:00:00') > 0)
-             $date = date("F j, Y", strtotime($event->date));
-         else
-             $date = date("F j, Y, g:i a", strtotime($event->date));
-         //         echo '<div style="font-size:12px;font-weight:bold">' . $date . "</div>";
-         //         echo '<div style="font-size:13px">' . $event->description . "</div>";
-
          $attributes = array('id' => 'my_form', 'name' => 'my_form');
          $hidden = array('id' => $event->id);
 
@@ -29,6 +22,13 @@ echo '<div class="breadcrumbs">' . $page_title . '</div>';
          echo "<div id='admin_title'>";
          echo form_label('Title:', 'title');
          echo form_input('title', $event->title);
+
+         echo form_label('Date:', 'date');
+         if (strpos($event->date, '00:00:00') > 0)
+             $date = date("F j, Y", strtotime($event->date));
+         else
+             $date = date("F j, Y, g:i a", strtotime($event->date));
+         echo form_input('date', $date);
          echo "</div>";
 
          echo '<div class="sidebar">';
@@ -46,13 +46,8 @@ echo '<div class="breadcrumbs">' . $page_title . '</div>';
          echo '</div>';
          echo '</div>';
 ?>
-        <div class="status clear">Date/time:&nbsp;&nbsp;    
-          <div class="blogdate">
-        <?php echo js_calendar_write('date', time(), true); ?>
-         <input id="blogdateinput" type="text" name="date" value="<?php echo $event->date ?>" onblur="update_calendar(this.name, this.value);" />
       </div>
     </div>
-  </div>
   </div>
   <div style="clear:left; width: 700px;">
 <?php
