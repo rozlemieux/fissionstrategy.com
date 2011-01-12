@@ -10,13 +10,13 @@
     <?php } ?>
       <title>Fission Strategy</title>
       <link rel="shortcut icon" href="/favicon.ico" /> 
-      <link rel="stylesheet" href="<?php echo base_url();?>/css/style.css" type="text/css" media="screen" />
+      <link rel="stylesheet" href="<?php echo base_url();?>/css/style.css?2" type="text/css" media="screen" />
 
       <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>/js/fancybox/jquery.fancybox-1.3.1.css" media="screen" />
       
       <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js" type="text/javascript" charset="utf-8"></script>	
       <script type="text/javascript" src="<?php echo base_url();?>/js/jquery.jcarousel.js"></script>
-      <script type="text/javascript" src="<?php echo base_url();?>/js/scripts.js"></script>
+      <script type="text/javascript" src="<?php echo base_url();?>/js/scripts.js?2"></script>
       <script type="text/javascript" src="<?php echo base_url();?>/js/fancybox/jquery.fancybox-1.3.1.js"></script>
       <script type="text/javascript" src="<?php echo base_url();?>/js/jcarousel_init.js"></script>
 

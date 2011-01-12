@@ -14,9 +14,6 @@ if ($carousel) {
 
 
 foreach ($case_studies as $case_study) {  
-    $content = $case_study->content;
-    $content = (strlen($content) > 80) ? substr($content, 0, 80) : $content;
-
     $image_style = ' style="height:270px;width:270px;overflow:hidden;background-color:white" ';
     $image_width =  ' ';
     if (($main_content == 'services') || ($main_content == 'team') || ($main_content == 'clients') || ($main_content == 'blog')  || ($main_content == 'blog_single') || ($main_content == 'contact_form') || ($main_content == 'case_study')) {
@@ -49,7 +46,7 @@ foreach ($case_studies as $case_study) {
 	  <a href="/case_studies/" title="View all posts in Case Studies" rel="category tag">Case Studies</a>
         </p>
         <p>
-	  <?php echo $content ?>
+            <?php echo $case_study->excerpt ?>
         </p>
         <a href="#slice-<?php echo $case_study->id ?>" rel="casestudy" id="inline" class="more lightbox">read the case study</a>
       </div>
@@ -68,8 +65,6 @@ foreach ($case_studies as $case_study) {
   
   <?php 
      foreach ($case_studies as $case_study) {  
-       $content = $case_study->content;
-       $content = (strlen($content) > 80) ? substr($content, 0, 80) : $content;
        $name = $case_study->name;
        $id = $case_study->id;
        $title = $case_study->title;
@@ -112,7 +107,7 @@ foreach ($case_studies as $case_study) {
       </div>
       <div class="case-text">
 	<div class="case-desc">
-          <?php echo $case_study->content ?>
+       <?php echo $case_study->content ?>
 	</div>
       </div>
 

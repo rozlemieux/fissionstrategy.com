@@ -6,6 +6,7 @@ class Case_study_model extends Model {
         var $title = '';
         var $author = '';
         var $content = '';
+        var $excerpt = '';
         var $thumb = '';
         var $modified = '';
         var $status = '';
@@ -293,6 +294,7 @@ class Case_study_model extends Model {
                 $this->status = $c->status;
                 $this->title = $c->title;
                 $this->content = $c->content;
+                $this->excerpt = $this->_truncate($c->content, 160, $break=" ", $pad=" ...");
                 $this->thumb = $c->thumb;
                 $this->url = $c->url;
                 $this->date = $c->date;
@@ -319,5 +321,21 @@ class Case_study_model extends Model {
         
                 return $case_study_url;
         }
+
+        // common function to truncate strings
+        //
+        function _truncate($string, $limit, $break=".", $pad="...") {
+
+                if(strlen($string) <= $limit) return $string;
+
+                if (false !== ($breakpoint = strpos($string, $break, $limit))) {
+                        if($breakpoint < strlen($string) - 1) {
+                                $string = substr($string, 0, $breakpoint) . $pad;
+                        }
+                }
+    
+                return $string;
+        }
+
 }
 

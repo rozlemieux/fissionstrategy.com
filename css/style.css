@@ -226,6 +226,7 @@ html, body {
 .slider .panel h1 {
 	padding-top: 12px;
 	color: #fff;	
+        font-size: 18px;
 }
 
 .slider .panel a {
