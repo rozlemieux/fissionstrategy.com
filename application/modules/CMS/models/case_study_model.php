@@ -279,7 +279,7 @@ class Case_study_model extends Model {
                         if (!isset($tags[$c->case_study_id]))
                                 $tags[$c->case_study_id] = array();
 
-                        $tags[$c->case_study_id][] = array('id' => $c->id, 'name' => $c->name);
+                        $tags[$c->case_study_id][$c->id] = array('id' => $c->id, 'name' => $c->name);
                 }
                 return $tags;
         }
@@ -294,7 +294,7 @@ class Case_study_model extends Model {
                 $this->status = $c->status;
                 $this->title = $c->title;
                 $this->content = $c->content;
-                $this->excerpt = $this->_truncate($c->content, 160, $break=" ", $pad=" ...");
+                $this->excerpt = $this->_truncate($c->content, 80, $break=" ", $pad=" ...");
                 $this->thumb = $c->thumb;
                 $this->url = $c->url;
                 $this->date = $c->date;

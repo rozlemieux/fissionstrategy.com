@@ -148,8 +148,9 @@ html, body {
 }
 
 .slider {
-	height: 355px;
+	height: 400px;
 	clear: both;
+        background-color: #333333;
 	background-image: url(/img/slider-bg.gif);
 	background-repeat: no-repeat;
 	margin-bottom: 29px;
@@ -186,14 +187,14 @@ html, body {
 }
 
 .slider .belt {
-	overflow: hidden;
-	height: 355px;
+        overflow: hidden;
+	height: 400px;
 	width: 953px;
 }
 
 .slider .panel {
 	width: 301px;
-	height: 355px;
+	height: 400px;
 	float: left;
 	margin: 0 10px;
 	font-family: Helvetica, "Helvetica", Arial, sans-serif;
@@ -206,10 +207,6 @@ html, body {
 
 * html .slider .panel {
 	overflow: hidden;
-}
-
-.slider li {
-	width: 301px;
 }
 
 .slider .panel .new {
@@ -564,6 +561,7 @@ a.more:hover {
 }
 
 .sidebar .inner-slider .panel h1 {
+        font-size: 18px;
 	color: #fff;	
 	padding-top:7px;
 }
@@ -871,6 +869,7 @@ a.more:hover {
 }
 
 .projects .project h1 {
+        font-size: 18px;
 	padding-top: 12px;
 	color: #fff;	
 }
