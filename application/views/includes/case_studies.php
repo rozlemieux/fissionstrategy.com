@@ -36,9 +36,16 @@ foreach ($case_studies as $case_study) {
                   </div>
                   <?php break; } ?>
         <h1><?php echo $case_study->title ?></h1>
-        <?php foreach ($case_study->tags as $tag) { 
-           echo "<a href='/case_studies/page/0/{$tag['id']}' title='View all posts in {$tag['name']}' rel='category tag'>{$tag['name']}</a>&nbsp;";
+             <div style="line-height: 1em; ">
+        <?php $comma = ', '; 
+           $end = end($case_study->tags);
+           foreach ($case_study->tags as $tag) { 
+               if ($tag == $end)
+                   $comma = '';
+               echo "<a href='/case_studies/page/0/{$tag['id']}' title='View all posts in {$tag['name']}' rel='category tag'>";
+               echo $tag['name'] . '</a>' . $comma . "";
           } ?>
+           </div>
       </div>
       <div class="block-text">
         <h1><?php echo $case_study->title ?></h1>
