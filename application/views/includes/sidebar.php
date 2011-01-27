@@ -29,6 +29,22 @@
     </div>
   </div>
 
+  <div class="column block" style="height: 280px;>
+      <h2><img src="/img/h-from-our-clients.gif" alt="from our clients" style="padding-top:7px;" /></h2>
+      <div id="quote"><?php echo $quote; ?>
+        <div class="author">
+  	  <?php echo $author; 
+               $quote_url =  $this->config->item('base_url') . 'projects/preview/' . $case_study->id;
+           ?>
+        </div>
+        <br/><a href="<?php echo $quote_url ?>" class="more">meet more of our clients</a>
+      </div>
+      <script> 
+               var quote_order = '<?php echo $quote_order ?>'; 
+               var max_quotes = <?php echo $max_quotes ?>; 
+      </script>
+  </div>
+
   <div class="block">
      <h2>
         <img alt="Latest tweet" src="/img/h-latest-tweet.gif"> 

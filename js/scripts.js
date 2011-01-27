@@ -94,7 +94,7 @@ jQuery(document).ready(function()
 
         if (typeof(total_events) !== 'undefined')
             setTimeout ("rotate_events()", rotation_interval);
-        if (typeof(quote_order) !== 'undefined')
+        if (typeof(quote_order) !== 'undefined') 
             setTimeout ("rotate_quote()", rotation_interval + 1000);
 });
 

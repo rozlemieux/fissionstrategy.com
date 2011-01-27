@@ -1,7 +1,6 @@
 <div class="main home">
   <a href="/projects/" class="view-all alignright">view more projects</a>
   <img src="/img/love-our-clients.gif" alt="" />
-
   <?php
      $slider_class = 'slider';
      $image_height = '227px';
@@ -14,7 +13,29 @@
       <img style="float: left; margin-right: 10px;" alt="we help organizations inspire social good through social media" src="/img/we-help-organizations.gif">
     </a>
   </div>
-  <div class="triple">
+  <?php $display_events = ($events) ? 'block' : 'none'; ?>
+  <div style="margin-top: 40px;display:<?php echo $display_events ?>">
+     <div style="width=300px;float:right"><img src="/img/events-see-us.gif" /></div>
+     <div class="events_slider">
+         <ul>
+           <?php 
+           $i = 0;
+           foreach ($events as $event) {
+             $time = date('g:i a', strtotime($event->date));
+             $time = ($time != '12:00 am') ? ' at ' . $time : '';
+             $year = date('Y', strtotime($event->date));
+             $month = date('m', strtotime($event->date));
+             echo '<li><a href="/events/calendar/' . $year . '/' . $month . '">';
+             echo '<b>' . date('F j', strtotime($event->date)) . $time . '</b>  --  ';
+             echo strip_tags($event->title, '<b>') . '</a></li>';
+             if ($i++ > 2) break;
+           }
+           ?>
+        </ul>
+        <script type="text/javascript">var total_events = '<?php echo ($i - 1) ?>';</script>
+     </div>
+  </div>
+  <div class="triple" style="padding-top:20px;">
 			
     <div class="column">
       <h2>
@@ -44,11 +65,20 @@
 
     <div class="column">
       <h2><img src="/img/h-from-our-clients.gif" alt="from our clients" style="padding-top:7px;" /></h2>
-      <?php echo $quote; ?>
-      <div class="author">
-	<?php echo $author; ?>
+      <div id="quote"><?php echo $quote; ?>
+        <div class="author">
+  	  <?php echo $author; 
+               $quote_url =  $this->config->item('base_url') . 'projects/preview/' . $case_study->id;
+           ?>
+        </div>
+        <br/><a href="<?php echo $quote_url ?>" class="more">meet more of our clients</a>
       </div>
-      <a href="/clients/" class="more">meet more of our clients</a>
+      <script> 
+               var quote_order = '<?php echo $quote_order ?>'; 
+               var max_quotes = '<?php echo $max_quotes ?>'; 
+      </script>
+      
     </div>
   </div>
 </div>
+

@@ -87,6 +87,7 @@ html, body {
 	width: 407px;
 	height: 85px;
 	float: left;
+        margin-top: -20px;
 }
 
 #sms-advocacy {
@@ -101,10 +102,10 @@ html, body {
 	background-image: url(/img/sms-hover.jpg);
 }
 
-.navigation {
-	float: right;
-	padding-top: 50px;
-}
+ .navigation {
+       float: right;
+       padding-top: 20px;
+ }
 
 .navigation ul li {
 	float: left;
