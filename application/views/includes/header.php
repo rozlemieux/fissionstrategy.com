@@ -10,13 +10,13 @@
     <?php } ?>
       <title>Fission Strategy</title>
       <link rel="shortcut icon" href="/favicon.ico" /> 
-      <link rel="stylesheet" href="<?php echo base_url();?>/css/style.css?5" type="text/css" media="screen" />
+      <link rel="stylesheet" href="<?php echo base_url();?>/css/style.css?7" type="text/css" media="screen" />
 
       <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>/js/fancybox/jquery.fancybox-1.3.1.css" media="screen" />
       
       <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js" type="text/javascript" charset="utf-8"></script>	
       <script type="text/javascript" src="<?php echo base_url();?>/js/jquery.jcarousel.js"></script>
-      <script type="text/javascript" src="<?php echo base_url();?>/js/scripts.js?2"></script>
+      <script type="text/javascript" src="<?php echo base_url();?>/js/scripts.js?6"></script>
       <script type="text/javascript" src="<?php echo base_url();?>/js/fancybox/jquery.fancybox-1.3.1.js"></script>
       <script type="text/javascript" src="<?php echo base_url();?>/js/jcarousel_init.js"></script>
 
@@ -62,7 +62,6 @@
                $home_active = ($main_content == 'homepage') ? " class='page_item current_page_item' " : '';
                $team_active = ($main_content == 'team') ? " class='current_page_item' " : '';
                $services_active = ($main_content == 'services') ? " class='current_page_item' " : '';
-               $clients_active = ($main_content == 'clients') ? " class='current_page_item' " : '';
                $blog_active = ($main_content == 'blog') ? " class='current_page_item' " : '';
                $events_active = ($main_content == 'events') ? " class='current_page_item' " : '';
                $projects_active = ($main_content == 'projects') ? " class='current_page_item' " : '';
@@ -74,7 +73,6 @@
 	      <li <?php echo $home_active ?>><a title="home" href="/">home</a></li>
               <li <?php echo $team_active ?>><a title="team" href="/team">team</a></li>
               <li <?php echo $services_active ?>><a title="services" href="/services/">services</a></li>
-              <li <?php echo $clients_active ?>><a title="clients" href="/clients/">clients</a></li>
               <li <?php echo $blog_active ?>><a title="blog" href="/blog/">blog</a></li>
               <li <?php echo $projects_active ?>><a title="projects" href="/projects/">projects</a></li>
               <li <?php echo $contact_active ?>><a title="contact" href="/contact/">contact</a></li>

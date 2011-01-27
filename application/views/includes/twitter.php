@@ -38,7 +38,7 @@ if( $s > 900 || strlen(file_get_contents($cache_file)) == 0 ) { //cache the feed
 
     $snoopy = new Snoopy;
     $snoopy->read_timeout = 4;
-    $snoopy->fetch("http://twitter.com/statuses/user_timeline/fissionstrategy.json?count=1");
+    $snoopy->fetch("http://twitter.com/statuses/user_timeline/fissionstrategy.json?count=2");
     $twitter_feed = $snoopy->results;
     file_put_contents($cache_file, $twitter_feed);
 } else {

@@ -6,6 +6,8 @@
     projects
   </h3>
 
+  <?php echo $page_model->content ?>
+
   <div class="projects">
     <?php
        $slider_class = 'project';

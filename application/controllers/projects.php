@@ -12,9 +12,13 @@ class Projects extends Site {
         //    any difference between projects and case studies other than case_studies are tagged
         // 
         function page($page = 0) {
+                $this->data = array();
+
+                $this->load->module_model('CMS', 'page_model');
+                $this->data['page_model'] = $this->page_model->get('clients');
+
                 // get case studies
                 $this->load->module_model('CMS', 'case_study_model');
-                $this->data = array();
                 $this->data['case_studies'] = $this->case_study_model->get('', 15, $page * 15);
                 $this->data['pages'] = floor($this->case_study_model->get_num() / 15) + 1;
                 $this->data['page'] = $page;
