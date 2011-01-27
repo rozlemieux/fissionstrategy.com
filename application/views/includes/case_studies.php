@@ -16,7 +16,7 @@ if ($carousel) {
 foreach ($case_studies as $case_study) {  
     $image_style = ' style="height:270px;width:270px;overflow:hidden;background-color:white" ';
     $image_width =  ' ';
-    if (($main_content == 'services') || ($main_content == 'team') || ($main_content == 'clients') || ($main_content == 'blog')  || ($main_content == 'blog_single') || ($main_content == 'contact_form') || ($main_content == 'case_study')) {
+    if (($main_content == 'services') || ($main_content == 'team') || ($main_content == 'blog')  || ($main_content == 'blog_single') || ($main_content == 'contact_form') || ($main_content == 'case_study')) {
         $image_width =  ' width="206px" ';
         $image_style = ' style="height:160px;width:190px;overflow:hidden;border-right: 4px solid white; border-bottom: 4px solid white; background-color:white" ';
     }
@@ -50,12 +50,10 @@ foreach ($case_studies as $case_study) {
       <div class="block-text">
         <h1><?php echo $case_study->title ?></h1>
         <p>
-	  <a href="/case_studies/" title="View all posts in Case Studies" rel="category tag">Case Studies</a>
-        </p>
-        <p>
             <?php echo $case_study->excerpt ?>
         </p>
-        <a href="#slice-<?php echo $case_study->id ?>" rel="casestudy" id="inline" class="more lightbox">read the case study</a>
+        <br />
+        <a href="#slice-<?php echo $case_study->id ?>" rel="casestudy" id="inline" class="more lightbox">read more &raquo;</a>
       </div>
            <?php if ($carousel) echo '</li>'; else echo '</div>'; ?>
 
@@ -110,8 +108,6 @@ foreach ($case_studies as $case_study) {
     </div>
     <div class="rightbar">
       <h3><?php echo $case_study->title ?></h3>
-      <div class="links"><a href="/case_studies/" title="View all posts in Case Studies" rel="category tag">Case Studies</a>
-      </div>
       <div class="case-text">
 	<div class="case-desc">
        <?php echo $case_study->content ?>

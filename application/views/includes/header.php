@@ -10,7 +10,7 @@
     <?php } ?>
       <title>Fission Strategy</title>
       <link rel="shortcut icon" href="/favicon.ico" /> 
-      <link rel="stylesheet" href="<?php echo base_url();?>/css/style.css?2" type="text/css" media="screen" />
+      <link rel="stylesheet" href="<?php echo base_url();?>/css/style.css?5" type="text/css" media="screen" />
 
       <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>/js/fancybox/jquery.fancybox-1.3.1.css" media="screen" />
       
@@ -64,6 +64,9 @@
                $services_active = ($main_content == 'services') ? " class='current_page_item' " : '';
                $clients_active = ($main_content == 'clients') ? " class='current_page_item' " : '';
                $blog_active = ($main_content == 'blog') ? " class='current_page_item' " : '';
+               $events_active = ($main_content == 'events') ? " class='current_page_item' " : '';
+               $projects_active = ($main_content == 'projects') ? " class='current_page_item' " : '';
+               $contact_active = ($main_content == 'contact_form') ? " class='current_page_item' " : '';
             }
           ?>
           <div class="navigation">
@@ -73,6 +76,9 @@
               <li <?php echo $services_active ?>><a title="services" href="/services/">services</a></li>
               <li <?php echo $clients_active ?>><a title="clients" href="/clients/">clients</a></li>
               <li <?php echo $blog_active ?>><a title="blog" href="/blog/">blog</a></li>
+              <li <?php echo $projects_active ?>><a title="projects" href="/projects/">projects</a></li>
+              <li <?php echo $contact_active ?>><a title="contact" href="/contact/">contact</a></li>
 	    </ul>
 	  </div>
 	</div>
+

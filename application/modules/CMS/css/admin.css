@@ -377,6 +377,18 @@ form input {
     margin: 0 10px;
 }
 
+#admin_edit .excerpt_textarea {
+    color: white;
+    clear: left;
+    height: 100px;
+    width: 270px;
+    border: none;
+    padding: 20px;
+    background: #333333 url(/img/panel-hover.png);
+    background-repeat: repeat;
+    margin: 0 10px;
+}
+
 .flexigrid div.fbutton .delete {
     background: url(/img/delete.png) no-repeat center left;
 }			

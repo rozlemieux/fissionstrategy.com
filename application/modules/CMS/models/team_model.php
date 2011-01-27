@@ -10,6 +10,7 @@ class Team_model extends Model {
         var $linkedin = '';
         var $twitter = '';
         var $skype = '';
+        var $order = '';
         var $status = 'publish';
 
         const table_name = 'fs_team';
@@ -28,13 +29,15 @@ class Team_model extends Model {
         function get($name = '', $limit = 99) {
 
                 $team_members = array();
-                $this->db->select('*');
+
+                $this->db->select('*', FALSE);  // the FALSE removes backticks to allow the order_by substring expression
                 $this->db->where('status', 'publish');
                 $this->db->from(self::table_name);
-                $this->db->order_by('id');
+                $this->db->order_by("fs_team.order, SUBSTRING(name, LOCATE(' ', name)+1)");
+
                 if ($name)
                         $this->db->where('name', $name);
-                //        $this->db->order_by('date', 'DESC');
+
                 $this->db->limit($limit);
                 $query = $this->db->get();
                 foreach ($query->result() as $c) {
@@ -107,6 +110,7 @@ class Team_model extends Model {
                         $this->linkedin = $changes['linkedin'];
                         $this->twitter = $changes['twitter'];
                         $this->skype = $changes['skype'];
+                        $this->order = $changes['order'];
 
                         if ($changes['photo'])
                                 $this->photo = $changes['photo'];
@@ -123,6 +127,7 @@ class Team_model extends Model {
                 $this->name = $c->name;
                 $this->team_title = $c->team_title;
                 $this->content = $c->content;
+                $this->order = $c->order;
                 $this->email = $c->email;
                 $this->photo = $c->photo;
                 $this->linkedin = $c->linkedin;

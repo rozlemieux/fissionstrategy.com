@@ -180,7 +180,7 @@
       </div>
       <script> 
                var quote_order = '<?php echo $quote_order ?>'; 
-               var max_quotes = 8; 
+               var max_quotes = '<?php echo $max_quotes ?>'; 
       </script>
       
     </div>

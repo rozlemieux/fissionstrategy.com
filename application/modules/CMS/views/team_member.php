@@ -40,6 +40,10 @@ echo '<div id="admin_edit">';
        <div class="clear_only"> <?php echo form_input('team_title', $team_member->team_title); ?></div>
     </div>
 
+    <div class="status clear_only">Order:
+       <div class="clear_only"> <?php echo form_input('order', $team_member->order); ?></div>
+    </div>
+
     <div class="status clear_only">Email:
        <div class="clear_only"> <?php echo form_input('email', $team_member->email); ?></div>
     </div>

@@ -294,7 +294,7 @@ class Case_study_model extends Model {
                 $this->status = $c->status;
                 $this->title = $c->title;
                 $this->content = $c->content;
-                $this->excerpt = $this->_truncate($c->content, 80, $break=" ", $pad=" ...");
+                $this->excerpt = ($c->excerpt) ? $c->excerpt : $this->_truncate($c->content, 200, $break=" ", $pad=" ...");
                 $this->thumb = $c->thumb;
                 $this->url = $c->url;
                 $this->date = $c->date;

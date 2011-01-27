@@ -107,13 +107,24 @@ echo "</div>";
   echo display_ckeditor($ckeditor); 
 
   $data = array(
+      'name'  => 'excerpt',
+      'class' => 'excerpt_textarea',
+      'col'   =>  60,
+      'rows'  =>  5,
+      'value' => $case_study->excerpt,
+  );
+
+  ?>
+  <div class="status clear_left">Excerpt: (used in small popup over case study)</div>
+     <div class="clear_left"> <?php echo form_textarea($data); ?></div>
+  <?
+  $data = array(
       'name'  => 'quote',
       'class' => 'quote_textarea',
       'col'   =>  80,
       'rows'  =>  5,
       'value' => $case_study->quote,
   );
-
   ?>
   <div class="status clear_left">Client Quote:</div>
      <div class="clear_left"> <?php echo form_textarea($data); ?></div>
