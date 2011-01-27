@@ -18,6 +18,10 @@ class Site extends Controller {
         function index() {
                 $this->_get_sidebar_data();
 
+                $this->load->module_model('CMS', 'Events_model');
+                $events = $this->Events_model->get(0, 4, date('Y'), date('m'), date('d'));
+                $this->data['events'] = $events;
+
                 $this->data['page_title'] = "Fission Strategy";
                 $this->data['main_content'] = 'homepage';
                 $this->load->view('includes/template', $this->data);		

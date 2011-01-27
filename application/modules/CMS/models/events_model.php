@@ -70,9 +70,12 @@ class Events_model extends Model {
     //
     function get($id = null, $limit = 0, $year = null, $month = null, $day = null) {
         
-        $this->db->select('id, title, date, description')->from('fs_events');
+        $this->db->select('id, title, date, description, status')->from('fs_events');
         if ($id)
             $this->db->where('id', $id);
+        else 
+            $this->db->where('status', 'publish');
+
         if ($limit)
             $this->db->limit($limit);
 
@@ -124,6 +127,8 @@ class Events_model extends Model {
                 $this->title = $changes['title'];
             if (isset($changes['content']))
                 $this->description = $changes['content'];
+            if (isset($changes['status']))
+                $this->status = $changes['status'];
             $this->load->helper('date');
             //            $this->updated = mdate("%Y-%m-%d %h:%i:%a", now());
         }
