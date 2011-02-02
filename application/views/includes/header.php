@@ -71,12 +71,12 @@
           ?>
           <div class="navigation">
 	    <ul>
-	      <li id="nav-home" <?php echo $home_active ?>><a title="home" href="/"><img src="/img/nav-home.gif" /></a></li>
-              <li id="nav-team" <?php echo $team_active ?>><a title="team" href="/team"><img src="/img/nav-team.gif" /></a></li>
-              <li id="nav-services" <?php echo $services_active ?>><a title="services" href="/services/"><img src="/img/nav-services.gif" /></a></li>
-              <li id="nav-projects" <?php echo $projects_active ?>><a title="projects" href="/projects/"><img src="/img/nav-projects.gif" /></a></li>
-              <li id="nav-events" <?php echo $events_active ?>><a title="events" href="/events/"><img src="/img/nav-events.gif" /></a></li>
-              <li id="nav-blog" <?php echo $blog_active ?>><a title="blog" href="/blog/"><img src="/img/nav-blog.gif" /></a></li>
+	      <li id="nav-home" <?php echo $home_active ?>><a alt="home" href="/"><img src="/img/nav-home.gif" /></a></li>
+              <li id="nav-team" <?php echo $team_active ?>><a alt="team" href="/team"><img src="/img/nav-team.gif" /></a></li>
+              <li id="nav-services" <?php echo $services_active ?>><a alt="services" href="/services/"><img src="/img/nav-services.gif" /></a></li>
+              <li id="nav-projects" <?php echo $projects_active ?>><a alt="projects" href="/projects/"><img src="/img/nav-projects.gif" /></a></li>
+              <li id="nav-events" <?php echo $events_active ?>><a alt="events" href="/events/"><img src="/img/nav-events.gif" /></a></li>
+              <li id="nav-blog" <?php echo $blog_active ?>><a alt="blog" href="/blog/"><img src="/img/nav-blog.gif" /></a></li>
 	    </ul>
 	  </div>
 	</div>
