@@ -10,7 +10,7 @@
     <?php } ?>
       <title>Fission Strategy</title>
       <link rel="shortcut icon" href="/favicon.ico" /> 
-      <link rel="stylesheet" href="<?php echo base_url();?>/css/style.css?7" type="text/css" media="screen" />
+      <link rel="stylesheet" href="<?php echo base_url();?>/css/style.css?8" type="text/css" media="screen" />
 
       <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>/js/fancybox/jquery.fancybox-1.3.1.css" media="screen" />
       
