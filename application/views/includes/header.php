@@ -40,8 +40,10 @@
     <body>
 
       <div class="wrapper">
-        <a href="http://smsadvocacy.com" id="sms-advocacy" target="_blank"></a>
+        <a href="/contact" id="contact-us" ></a>
+        <span class="hdr-facebook"><img src="/img/facebook.gif" alt="" /></span>
 	<div class="header">
+          <a href="http://smsadvocacy.com" id="sms-advocacy" target="_blank"></a>
 	  <a href="/" class="logo"></a>
 
          <?php if ( $this->session && $this->session->userdata('username')) {    ?>
@@ -62,20 +64,19 @@
                $home_active = ($main_content == 'homepage') ? " class='page_item current_page_item' " : '';
                $team_active = ($main_content == 'team') ? " class='current_page_item' " : '';
                $services_active = ($main_content == 'services') ? " class='current_page_item' " : '';
-               $blog_active = ($main_content == 'blog') ? " class='current_page_item' " : '';
-               $events_active = ($main_content == 'events') ? " class='current_page_item' " : '';
                $projects_active = ($main_content == 'projects') ? " class='current_page_item' " : '';
-               $contact_active = ($main_content == 'contact_form') ? " class='current_page_item' " : '';
+               $events_active = ($main_content == 'events') ? " class='current_page_item' " : '';
+               $blog_active = ($main_content == 'blog') ? " class='current_page_item' " : '';
             }
           ?>
           <div class="navigation">
 	    <ul>
-	      <li <?php echo $home_active ?>><a title="home" href="/">home</a></li>
-              <li <?php echo $team_active ?>><a title="team" href="/team">team</a></li>
-              <li <?php echo $services_active ?>><a title="services" href="/services/">services</a></li>
-              <li <?php echo $blog_active ?>><a title="blog" href="/blog/">blog</a></li>
-              <li <?php echo $projects_active ?>><a title="projects" href="/projects/">projects</a></li>
-              <li <?php echo $contact_active ?>><a title="contact" href="/contact/">contact</a></li>
+	      <li id="nav-home" <?php echo $home_active ?>><a title="home" href="/"><img src="/img/nav-home.gif" /></a></li>
+              <li id="nav-team" <?php echo $team_active ?>><a title="team" href="/team"><img src="/img/nav-team.gif" /></a></li>
+              <li id="nav-services" <?php echo $services_active ?>><a title="services" href="/services/"><img src="/img/nav-services.gif" /></a></li>
+              <li id="nav-projects" <?php echo $projects_active ?>><a title="projects" href="/projects/"><img src="/img/nav-projects.gif" /></a></li>
+              <li id="nav-events" <?php echo $events_active ?>><a title="events" href="/events/"><img src="/img/nav-events.gif" /></a></li>
+              <li id="nav-blog" <?php echo $blog_active ?>><a title="blog" href="/blog/"><img src="/img/nav-blog.gif" /></a></li>
 	    </ul>
 	  </div>
 	</div>
