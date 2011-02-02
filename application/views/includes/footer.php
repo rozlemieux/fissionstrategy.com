@@ -18,7 +18,10 @@
 
   </div>
 </div>
-
+<div style="display:none">
+<img src="/img/contact_us_hover.gif" />
+<img src="/img/get-sms-report-hover.gif" />
+</div>
 <script type="text/javascript">
 
   var _gaq = _gaq || [];
