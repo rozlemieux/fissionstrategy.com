@@ -38,7 +38,7 @@
 			 pagestat: 'Displaying {from} to {to} of {total} items',
 			 pagetext: 'Page',
 			 outof: 'of',
-			 findtext: 'Find',
+			 findtext: 'Search',
 			 procmsg: 'Processing, please wait ...',
 			 query: '',
 			 qtype: '',
@@ -1220,9 +1220,11 @@
 				}
 				
 				if (p.qtype=='') p.qtype = sitems[0].name;
-				
-				$(g.sDiv).append("<div class='sDiv2'>"+p.findtext+" <input type='text' size='30' name='q' class='qsbox' /> <select name='qtype'>"+sopt+"</select> <!--input type='button' value='Clear' /--></div>");
+                            // cindy - rearranged search bar
+				$(g.sDiv).append("<div class='sDiv2'>"+p.findtext+
+                                    "  <input name='qgo' type='button' value='find' ><input type='text' size='20' name='q' class='qsbox' /> <select name='qtype'>"+sopt+"</select></div>");
 
+				$('input[name=qgo]',g.sDiv).click(function(){g.doSearch()});
 				$('input[name=q],select[name=qtype]',g.sDiv).keydown(function(e){if(e.keyCode==13) g.doSearch()});
 				$('input[value=Clear]',g.sDiv).click(function(){$('input[name=q]',g.sDiv).val(''); p.query = ''; g.doSearch(); });
 
