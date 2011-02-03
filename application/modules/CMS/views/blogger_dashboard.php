@@ -8,12 +8,12 @@ echo '<script type="text/javascript">var active_category_id = "' . $active_categ
 
 //echo '<div id="fullpage">full page width</div>';
 echo '<form method="POST" action="/CMS/blogger/get_category">';
-echo "<h2>Category:</h2>";
-echo "<div style='float:left;padding-bottom:20px;'>$categories</div>";
-echo "<div style='margin-top:20px;clear:both'>";
-echo '<input type="submit" value="filter"></div>';
+echo "<div style='float:left'>Category:</div>";
+echo "<div style='float:left;padding-left:40px;'>$categories</div>";
+echo "<div style='float: left;padding-left:40px;'>";
+echo '<input type="submit" value="filter by selected category(s)"></div>';
 echo '</form>';
-
+echo '<div style="clear:both"></div>';
 echo $js_grid;
 
 if (isset($create_button)) {   ?>
