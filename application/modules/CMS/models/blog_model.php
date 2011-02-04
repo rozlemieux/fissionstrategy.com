@@ -73,6 +73,7 @@ class Blog_model extends Model {
                         if (isset($changes['date']))
                                 $this->date = $changes['date'];
                         $this->load->helper('date');
+                        $this->author = ($changes['author']) ? $changes['author'] : $changes['current_author'];
                         $this->modified = mdate("%Y-%m-%d %h:%i:%a", now());
                         if (isset($changes['thumb']))
                                 $this->thumb = $changes['thumb'];
@@ -114,7 +115,7 @@ class Blog_model extends Model {
         function get_from_id($id) {  
                 $query = $this->db->get_where(self::table_name, array('id' => $id));
                 foreach ($query->result() as $c) 
-                        $this->_load_from_query($c);
+                    $this->_load_from_query($c);
 
                 return $this;
         }

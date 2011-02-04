@@ -160,7 +160,11 @@ class Blog extends CMS {
                 $data['menu_highlight'] = "Blog";
                 $data['id'] = $id;
                 $data['page_title'] = $title;
+                
+                $uid = $this->session->userdata('id');
+                $blog->author = ($blog->author == '') ? $uid : $blog->author;
                 $data['blog'] = $blog;
+                $data['authors'] = $this->_get_author_select();
 
                 $this->_build_calendar();
                 $this->load->helper('ckeditor');
@@ -200,7 +204,7 @@ class Blog extends CMS {
                 }
 
                 $uid = $this->session->userdata('id');
-                $_POST['author'] = ($uid > 0) ? $uid : 1;
+                $_POST['current_author'] = ($uid > 0) ? $uid : 1;
 
                 if ($id)
                         $blog->save($_POST);
@@ -209,5 +213,17 @@ class Blog extends CMS {
 
                 return $id;
         }
+        
+        function _get_author_select() {
+            $this->load->model('membership_model');
+
+            $author_list = $this->membership_model->getUser();
+            foreach ($author_list as $author) {
+                $authors[$author['id']] = $author['first_name'] . ' ' . $author['last_name'];
+            }
+
+            return $authors;
+        }
+
 
 }

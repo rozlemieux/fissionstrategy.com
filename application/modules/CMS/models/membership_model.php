@@ -7,22 +7,25 @@ class Membership_model extends Model {
         // get user from database by id
         // 
         function getUser($id = '') {
-                $user = array('id' => '', 'username' => '', 'first_name' => '', 'last_name' => '', 'avatar' => '', 'email_address' => '');
-                if ($id) {
-                        $this->db->select('*');
-                        $this->db->where('id', $id);
-                        $query = $this->db->get('fs_membership');
-                        foreach ($query->result() as $c) {
-                                $user['id'] = $c->id;
-                                $user['username'] = $c->username;
-                                $user['first_name'] = $c->first_name;
-                                $user['last_name'] = $c->last_name;
-                                $user['avatar'] = $c->avatar;
-                                $user['email_address'] = $c->email_address;
-                                break;
-                        }
-                }
-                return $user;
+            $users = array();
+            $user = array('id' => '', 'username' => '', 'first_name' => '', 'last_name' => '', 'avatar' => '', 'email_address' => '');
+            $this->db->select('*');
+            if ($id) 
+                $this->db->where('id', $id);
+            $query = $this->db->get('fs_membership');
+            foreach ($query->result() as $c) {
+                $user['id'] = $c->id;
+                $user['username'] = $c->username;
+                $user['first_name'] = $c->first_name;
+                $user['last_name'] = $c->last_name;
+                $user['avatar'] = $c->avatar;
+                $user['email_address'] = $c->email_address;
+                if ($id) 
+                    return $user;
+
+                $users[] = $user;
+            }
+            return $users;
         }
 
         // validate password 

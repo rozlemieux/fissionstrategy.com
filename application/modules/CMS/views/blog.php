@@ -36,7 +36,8 @@ echo "</div>";
                   'private'   => 'Private',
                   'trash'   => 'Trash',
                 );
-      echo form_dropdown('status', $options, $blog->status);
+
+             echo form_dropdown('status', $options, $blog->status); 
 
       if ($blog->id)
               echo "<br /><a href=\"/blog/preview/{$blog->name}\">preview</a>";
@@ -59,6 +60,10 @@ echo "</div>";
           </div>
         <?php } ?>
        </div>
+    </div>
+
+    <div class="status clear">Author:
+        <?php echo form_dropdown('author', $authors, $blog->author);      ?>
     </div>
 
     <div class="status clear">Date/time:&nbsp;&nbsp;    
