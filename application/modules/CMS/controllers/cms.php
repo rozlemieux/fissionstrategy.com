@@ -59,7 +59,9 @@ class CMS extends Controller {
                                         $value = "\t";
                                 } else {
                                         $value = str_replace('"', '""', $value);
-                                        $value = '"' . $value . '"' . "\t";
+                                        $value = str_replace("\t", '    ', $value);
+                                        //$value = '"' . $value . '"' . "\t";
+                                        $value = $value . "\t";
                                 }
                                 $line .= $value;
                         }
@@ -94,6 +96,9 @@ class CMS extends Controller {
 
         // make the id cell with edit, ... actions
         function _make_action_field($field, $link) {
+            if ($this->input->post('export')) 
+                return $field;
+
             $r = $field . '<br />';
             $r .= '<a title="Open full editor" href="' . $link . '">';
             $r .= '<img src="/img/comment_edit.png" /></a>';

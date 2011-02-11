@@ -103,17 +103,20 @@ class Blogger extends CMS {
                 $this->flexigrid->validate_post('id', $valid_fields);
                 $records = $this->grid_model->get_blogger($cat_ids);
             
+                $exporting = ($this->input->post('export')) ? true : false;
+ 
                 // NOTE these fields much match the same order as above _load()
                 foreach ($records['records']->result() as $row)	{
 
                         // create links for the linkable or emailable values
-                        if ($row->URL != '') {
+                        if ($exporting) 
+                            $blogname = $row->Blog_Name;
+                        else if ($row->URL != '') {
                                 if ($row->Blog_Name != '')
                                         $blogname = '<a target="_blank" title="Visit: ' . $row->Blog_Name . '" href="' . $row->URL . '">' . $row->Blog_Name . '</a>';
                                 else 
                                         $blogname = '<a target="_blank" title="Visit: ' . $row->URL . '" href="' . $row->URL . '">noname</a>';
                         }
-                        else $blogname = $row->Blog_Name;
 
                         $blog_email = '';
                         $blog_email2 = '';
@@ -121,16 +124,28 @@ class Blogger extends CMS {
                         $Twitter_Outlet = '';
                         $Facebook = '';
 
-                        if ($row->Email != '') 
-                                $blog_email = '<a title="Compose Email to: ' . $row->Blog_Name . '" href="mailto:' . $row->Email . '">' . $row->Email . '</a>';
-                        if ($row->Email2 != '') 
-                                $blog_email2 = '<a title="Compose Email to: ' . $row->Blog_Name . '" href="mailto:' . $row->Email2 . '">' . $row->Email2 . '</a>';
-                        if ($row->Web_Form_URL != '') 
-                                $Web_Form_URL = '<a target="_blank" title="Visit: ' . $row->Web_Form_URL . '" href="' . $row->Web_Form_URL . '">' . $row->Web_Form_URL . '</a>';
-                        if ($row->Twitter_Outlet != '') 
-                                $Twitter_Outlet = '<a  target="_blank" title="Visit: ' . $row->Twitter_Outlet . '" href="' . $row->Twitter_Outlet . '">' . $row->Twitter_Outlet . '</a>';
+                        if ($exporting) 
+                            $blog_email = $row->Email;
+                        else if ($row->Email != '')
+                            $blog_email = '<a title="Compose Email to: ' . $row->Blog_Name . '" href="mailto:' . $row->Email . '">' . $row->Email . '</a>';
+
+                        if ($exporting) 
+                            $blog_email2 = $row->Email2;
+                        else if ($row->Email2 != '') 
+                            $blog_email2 = '<a title="Compose Email to: ' . $row->Blog_Name . '" href="mailto:' . $row->Email2 . '">' . $row->Email2 . '</a>';
+                        if ($exporting) 
+                            $Web_Form_URL = $row->Web_Form_URL;
+                        else if ($row->Web_Form_URL != '') 
+                            $Web_Form_URL = '<a target="_blank" title="Visit: ' . $row->Web_Form_URL . '" href="' . $row->Web_Form_URL . '">' . $row->Web_Form_URL . '</a>';
+
+                        if ($exporting) 
+                            $Twitter_Outlet = $row->Twitter_Outlet;
+                        else if ($row->Twitter_Outlet != '') 
+                            $Twitter_Outlet = '<a  target="_blank" title="Visit: ' . $row->Twitter_Outlet . '" href="' . $row->Twitter_Outlet . '">' . $row->Twitter_Outlet . '</a>';
                         
-                        if ($row->Facebook != '') 
+                        if ($exporting) 
+                            $Facebook = $row->Facebook;
+                        else if ($row->Facebook != '') 
                                 $Facebook = '<a  target="_blank" title="Visit: ' . $row->Facebook . '" href="' . $row->Facebook . '">' . $row->Facebook . '</a>';
                         
                         // now record the row 
@@ -166,7 +181,7 @@ class Blogger extends CMS {
                 // create a temp export file of this data
                 if ($this->input->post('export')) {
 
-                        $contents = 'rowid, id,Source, Edit, URL,Email,Email_2,First_Name,Last_Name,City,State,Phone,Skype,Fax,Web_Form_URL,Authority, Twitter_Blogger,Twitter_Blogger_Followers,Twitter_Outlet,Twitter_Outlet_Followers,Facebook, Notes,Estimated_Readership,Additional_Contact,end' . "\n";
+                        $contents = 'rowid,id,Source,Blog_Name,Category, Email,Email_2,Web_Form_URL,First_Name,Last_Name,City,State,Phone,Skype,Fax,Authority, Twitter_Blogger,Twitter_Blogger_Followers,Twitter_Outlet,Twitter_Outlet_Followers,Facebook,URL,Notes,import_notes,Estimated_Readership,Additional_Contact,end' . "\n";
 
                         $this->export($contents, $record_items);
                         return;
