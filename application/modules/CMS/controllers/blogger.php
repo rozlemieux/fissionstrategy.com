@@ -130,8 +130,8 @@ class Blogger extends CMS {
                             $blog_email = '<a title="Compose Email to: ' . $row->Blog_Name . '" href="mailto:' . $row->Email . '">' . $row->Email . '</a>';
 
                         if ($exporting) 
-                            $blog_email2 = $row->Email2;
-                        else if ($row->Email2 != '') 
+                            $blog_email2 = $row->Email_2;
+                        else if ($row->Email_2 != '') 
                             $blog_email2 = '<a title="Compose Email to: ' . $row->Blog_Name . '" href="mailto:' . $row->Email2 . '">' . $row->Email2 . '</a>';
                         if ($exporting) 
                             $Web_Form_URL = $row->Web_Form_URL;
@@ -166,7 +166,7 @@ class Blogger extends CMS {
                                           $this->_make_editable_field($row->Fax),
                                           $this->_make_editable_field($row->Authority),
                                           $this->_make_editable_field($row->Twitter_Blogger),
-                                          $this->_make_editable_field($row->Twitter_blogger_Followers),
+                                          $this->_make_editable_field($row->Twitter_Blogger_Followers),
                                           $this->_make_editable_url($row->Twitter_Outlet, $Twitter_Outlet),
                                           $this->_make_editable_field($row->Twitter_Outlet_Followers),
                                           $this->_make_editable_url($row->Facebook, $Facebook),

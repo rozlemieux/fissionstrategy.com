@@ -79,6 +79,7 @@ html, body {
 .header {
 	height: 91px;
 	padding: 97px 0 34px 0;
+        width: 100%;
 }
 
 .header .logo {
@@ -342,7 +343,8 @@ html, body {
 	font-size: 14px;
 	color: #999;
 	display: block;
-	line-height: 24px;
+	line-height: 18px;
+        padding-top: 10px;
 }
 
 .column a {

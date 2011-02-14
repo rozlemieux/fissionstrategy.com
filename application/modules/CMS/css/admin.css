@@ -198,8 +198,6 @@ form input {
 }
 
 .flexigrid div.hDiv th, .flexigrid div.bDiv td {
-    border-left: 1px solid green;
-    border-right: 1px solid green;
 }
 
 .flexigrid div.sDiv{
@@ -421,7 +419,7 @@ form input {
 
 #lightbox {
     display:none;
-    background:white;
+    background:black;
     opacity:0.3;
     filter:alpha(opacity=30);
 }

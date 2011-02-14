@@ -6,7 +6,7 @@
     <link rel="shortcut icon" href="/favicon.ico" /> 
     <link rel="stylesheet" href="<?php echo base_url();?>css/style.css" type="text/css" media="screen" />
     <link href="<?php echo $this->config->item('base_url');?>public/css/flexigrid.css?1" rel="stylesheet" type="text/css" />
-    <link rel="stylesheet" href="<?php echo base_url();?>application/modules/CMS/css/admin.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="<?php echo base_url();?>application/modules/CMS/css/admin.css?1" type="text/css" media="screen" />
     <script src="/js/cufon-yui.js" type="text/javascript"></script>
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script> 
     <script type="text/javascript" src="<?php echo $this->config->item('base_url');?>public/js/flexigrid.js"></script>
