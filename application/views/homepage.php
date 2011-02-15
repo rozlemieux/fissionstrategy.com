@@ -26,7 +26,11 @@
              $year = date('Y', strtotime($event->date));
              $month = date('m', strtotime($event->date));
              echo '<li><a href="/events/calendar/' . $year . '/' . $month . '">';
-             echo '<b>' . date('F j', strtotime($event->date)) . $time . '</b>  --  ';
+             $repeat = '';
+             if ($event->repeat) 
+                 $repeat .= ' - ' . date("F j", strtotime($event->date) + (($event->repeat - 1) * (24 * 60 * 60)));
+
+             echo '<b>' . date('F j', strtotime($event->date)) . $repeat . '</b>  --  ';
              echo strip_tags($event->title, '<b>') . '</a></li>';
              if ($i++ > 2) break;
            }

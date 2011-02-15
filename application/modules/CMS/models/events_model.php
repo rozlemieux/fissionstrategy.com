@@ -4,6 +4,7 @@ class Events_model extends Model {
     var $date = '';
     var $title = '';
     var $description = '';
+    var $repeat = '';
 
     function Events_model () {
         parent::Model();
@@ -70,7 +71,7 @@ class Events_model extends Model {
     //
     function get($id = null, $limit = 0, $year = null, $month = null, $day = null) {
         
-        $this->db->select('id, title, date, description, status')->from('fs_events');
+        $this->db->select('*')->from('fs_events');
         if ($id)
             $this->db->where('id', $id);
         else 
@@ -123,8 +124,15 @@ class Events_model extends Model {
                 $date = date("Y-m-d H:i:s", strtotime($changes['date']));
                 $this->date = $date;
             }
+            if (isset($changes['repeat'])) {
+                if ($changes['repeat']) 
+                    $this->repeat = ((strtotime($changes['repeat']) - strtotime($changes['date'])) / (24 * 60 * 60)) + 1;
+                else $this->repeat = 0;
+            }
             if (isset($changes['title'])) 
                 $this->title = $changes['title'];
+            if ($this->title == '') $this->title = 'no title';
+
             if (isset($changes['content']))
                 $this->description = $changes['content'];
             if (isset($changes['status']))
@@ -169,7 +177,7 @@ class Events_model extends Model {
     // info to generate a calendar page
     function _get_calendar_data($year, $month, $small = false) {
 
-        $query = $this->db->select('id, date, title, description')->from('fs_events')
+        $query = $this->db->select('*', FALSE)->from('fs_events')
             ->like('date', "$year-$month", 'after')->get();
 
         $cal_data = array();
@@ -178,14 +186,20 @@ class Events_model extends Model {
             $url = ($this->conf['is_CMS']) ? '/CMS/events/event/' : '/events/event/';
             $url .= $row->id;
 
-            $event = '<a href="' . $url . '">' . $row->description . '</a>';
+            $event = '<a href="' . $url . '">' . $row->title . '</a>';
             if ($small)
                 $event = '<a href="' . $url . '" style="float:left;width:30px;height:10px;background-color: green"></a>';
 
-            if (isset($cal_data[substr($row->date,8,2) + 0]))
-                $cal_data[substr($row->date,8,2) + 0] .= $event;
-            else 
-                $cal_data[substr($row->date,8,2) + 0] = $event;
+            $day = substr($row->date,8,2);
+            $repeat = ($row->repeat == 0) ? 1 : $row->repeat;
+            while ($repeat > 0) {
+                if (isset($cal_data[$day + 0]))
+                    $cal_data[$day + 0] .= $event;
+                else 
+                    $cal_data[$day + 0] = $event;
+                $day += 1;
+                $repeat = $repeat - 1;
+            }
         }
 		
         return $cal_data;
@@ -198,5 +212,6 @@ class Events_model extends Model {
         $this->title = $c->title;
         $this->description = $c->description;
         $this->date = $c->date;
+        $this->repeat = $c->repeat;
     }
 }

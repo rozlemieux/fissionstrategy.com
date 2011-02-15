@@ -23,15 +23,18 @@ echo '<div class="breadcrumbs">' . $page_title . '</div>';
          echo form_label('Title:', 'title');
          echo form_input('title', $event->title);
 
-         echo form_label('Date:', 'date');
+         echo "</div>";
+
+         echo '<div class="sidebar">';
+
          if (strpos($event->date, '00:00:00') > 0)
              $date = date("F j, Y", strtotime($event->date));
          else
              $date = date("F j, Y, g:i a", strtotime($event->date));
-         echo form_input('date', $date);
-         echo "</div>";
 
-         echo '<div class="sidebar">';
+         $repeat = 0;
+         if ($event->repeat > 0)
+             $repeat = date("F j, Y", strtotime($event->date) + (($event->repeat - 1) * (24 * 60 * 60)));
 
          echo '<div class="block cms_blue">';
          echo '<div class="status clear">Status:&nbsp;';
@@ -45,8 +48,22 @@ echo '<div class="breadcrumbs">' . $page_title . '</div>';
          echo form_dropdown('status', $options, $event->status);
          echo '</div>';
          echo '</div>';
+         echo '</div>';
+
+         echo '<div class="block cms_blue">';
+         echo '<div class="status clear_only">Date:&nbsp;<br/>';
+         $data = array('name' => 'date','value' => $date);
+         echo form_input($data);
+         echo '</div>';
+         echo '</div>';
+
+         echo '<div class="block cms_blue">';
+         echo '<div class="status clear_only">End date :<small>(if more than one day</small>&nbsp;<br/>';
+         $data = array('name' => 'repeat', 'value' => $repeat);
+         echo form_input($data);
+         echo '</div>';
+         echo '</div>';
 ?>
-      </div>
     </div>
   </div>
   <div style="clear:left; width: 700px;">

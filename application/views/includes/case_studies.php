@@ -16,7 +16,7 @@ if ($carousel) {
 foreach ($case_studies as $case_study) {  
     $image_style = ' style="height:270px;width:270px;overflow:hidden;background-color:white" ';
     $image_width =  ' ';
-    if (($main_content == 'services') || ($main_content == 'team') || ($main_content == 'blog')  || ($main_content == 'blog_single') || ($main_content == 'contact_form') || ($main_content == 'case_study')) {
+    if (($main_content == 'services') || ($main_content == 'team') || ($main_content == 'blog')  || ($main_content == 'blog_single') || ($main_content == 'contact_form') || ($main_content == 'case_study') || ($main_content == 'events')) {
         $image_width =  ' width="206px" ';
         $image_style = ' style="height:160px;width:190px;overflow:hidden;border-right: 4px solid white; border-bottom: 4px solid white; background-color:white" ';
     }

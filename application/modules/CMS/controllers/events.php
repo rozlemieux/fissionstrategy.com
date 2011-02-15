@@ -32,7 +32,7 @@ class Events extends CMS {
     // display a single event
     //
     function event($id = null, $date = null) {
-        if ($id)
+        if ($id) 
             $events = $this->Events_model->get($id);
         else {
             $event = new Events_model();
