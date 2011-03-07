@@ -44,37 +44,41 @@ class CMS extends Controller {
         //
         function export($contents, $record_items) {
 
-                $dirname = $this->config->item('base_dir');
-                $name = 'exports/' . time() . '.xls';
-                $filename = $dirname . $name;
+            //$sep = "\t";
+            $sep = ',';
+            $dirname = $this->config->item('base_dir');
+            $name = 'exports/' . time() . '.xls';
+            $filename = $dirname . $name;
 
-                // set up header as tab delimited
-                $contents = str_replace(' ', "", $contents);
-                $contents = str_replace(',', "\t", $contents);
+            // set up header as tab delimited
+            $contents = str_replace(' ', "", $contents);
+            //$contents = str_replace(',', "\t", $contents);
 
-                foreach ($record_items as $item) {
-                        $line = '';
-                        foreach ($item as $value) {
-                                if ((!isset($value)) OR ($value == "")) {
-                                        $value = "\t";
-                                } else {
-                                        $value = str_replace('"', '""', $value);
-                                        $value = str_replace("\t", '    ', $value);
-                                        //$value = '"' . $value . '"' . "\t";
-                                        $value = $value . "\t";
-                                }
-                                $line .= $value;
-                        }
-                        $contents .= trim($line)."\n";
+            foreach ($record_items as $item) {
+                $line = '';
+                foreach ($item as $value) {
+                    if ((!isset($value)) OR ($value == "")) {
+                        $value = $sep;
+                    } else {
+                        //                        $value = str_replace('"', '""', $value);
+                        //$value = str_replace($sep, '    ', $value);
+                        if (strpos($value, ',') > 0)
+                            $value = '"' . $value . '"' . $sep;
+                        else 
+                            $value = $value . $sep;
+                    }
+                    $line .= $value;
                 }
+                $contents .= trim($line) . "\n";
+            }
                 
-                $contents = str_replace("\r","",$contents);
+            $contents = str_replace("\r","",$contents);
 
-                file_put_contents($filename, $contents);
-                //          header("Content-type: application/x-msdownload");
-                //          header("Content-Disposition: attachment; filename=$filename.xls");
+            file_put_contents($filename, $contents);
+            //          header("Content-type: application/x-msdownload");
+            //          header("Content-Disposition: attachment; filename=$filename.xls");
 
-                $this->output->set_output($this->config->item('base_url') . $name);
+            $this->output->set_output($this->config->item('base_url') . $name);
         }
 
         // create the calendar for editing the date in the sidebar

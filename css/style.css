@@ -190,12 +190,9 @@ html, body {
 }
 
 .slider {
-	height: 400px;
 	clear: both;
-        background-color: #333333;
 	background-image: url(/img/slider-bg.gif);
 	background-repeat: no-repeat;
-	margin-bottom: 29px;
 	position: relative;
 	padding: 0 10px;
 }
