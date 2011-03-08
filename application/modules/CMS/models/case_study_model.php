@@ -45,6 +45,7 @@ class Case_study_model extends Model {
                 if ($category > 1) {
                         $this->db->join('fs_map', 'fs_map.case_study_id = fs_case_study.id');
                         $this->db->where('fs_map.cat_id', $category);
+                        $this->db->group_by('fs_case_study.id');
                 }
 
                 if ($name)
