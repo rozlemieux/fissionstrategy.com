@@ -47,12 +47,13 @@ class CMS extends Controller {
             //$sep = "\t";
             $sep = ',';
             $dirname = $this->config->item('base_dir');
-            $name = 'exports/' . time() . '.xls';
+            $name = 'exports/' . time() . '.csv';
             $filename = $dirname . $name;
 
             // set up header as tab delimited
-            $contents = str_replace(' ', "", $contents);
+            //$contents = str_replace(' ', "", $contents);
             //$contents = str_replace(',', "\t", $contents);
+            $contents .= "\n";
 
             foreach ($record_items as $item) {
                 $line = '';
@@ -60,8 +61,9 @@ class CMS extends Controller {
                     if ((!isset($value)) OR ($value == "")) {
                         $value = $sep;
                     } else {
-                        //                        $value = str_replace('"', '""', $value);
-                        //$value = str_replace($sep, '    ', $value);
+                        $value = str_replace('"', "'", $value);
+                        //                        $value = str_replace("\r", "", $value);
+                        //                        $value = str_replace("\n", "", $value);
                         if (strpos($value, ',') > 0)
                             $value = '"' . $value . '"' . $sep;
                         else 

@@ -148,10 +148,28 @@ class Blogger extends CMS {
                         else if ($row->Facebook != '') 
                                 $Facebook = '<a  target="_blank" title="Visit: ' . $row->Facebook . '" href="' . $row->Facebook . '">' . $row->Facebook . '</a>';
                         
+                        // fix up for batchbook
+                        if ($exporting) {
+                            if (($row->First_Name == '') || ($row->First_Name == 'Multiple')) 
+                                $row->First_Name = ($row->Email == '') ? $row->Blog_Name : $row->Email;
+                            if ($row->First_Name == '')
+                                $row->First_Name = ($row->URL == '') ? $row->Twitter_Blogger : $row->URL;
+                            if ($row->First_Name == '')
+                                $row->First_Name = 'nobody';
+                            // clean up state variables
+                            $row->State = substr($row->State, 0, 2);
+                            if (strpos('http:', $row->Email)) {
+                                $row->Notes = $row->Notes . $row->Email;
+                                $row->Email = '';
+                            }
+                        }
+                           
+                        $import_notes = ($exporting) ? '' : $row->import_notes;
+                        $source = ($exporting) ? str_replace(", ", " - " , $row->Source) : $row->Source;
                         // now record the row 
                         $record_items[] = array($row->id,
                                           $this->_make_action_field($row->id, "/CMS/blogger/edit/" . $row->id),
-                                          $this->_make_editable_field($row->Source),
+                                          $this->_make_editable_field($source),
                                           $this->_make_editable_url($row->Blog_Name, $blogname),
                                           $row->catname,
                                           $this->_make_editable_url($row->Email, $blog_email),
@@ -172,7 +190,7 @@ class Blogger extends CMS {
                                           $this->_make_editable_url($row->Facebook, $Facebook),
                                           $this->_make_editable_field($row->URL),
                                           $this->_make_editable_field($row->Notes),
-                                          $this->_make_editable_field($row->import_notes),
+                                          $this->_make_editable_field($import_notes),
                                           $this->_make_editable_field($row->Estimated_Readership),
                                           $this->_make_editable_field($row->Additional_Contacts)
                         );
@@ -182,6 +200,8 @@ class Blogger extends CMS {
                 if ($this->input->post('export')) {
 
                         $contents = 'rowid,id,Source,Blog_Name,Category, Email,Email_2,Web_Form_URL,First_Name,Last_Name,City,State,Phone,Skype,Fax,Authority, Twitter_Blogger,Twitter_Blogger_Followers,Twitter_Outlet,Twitter_Outlet_Followers,Facebook,URL,Notes,import_notes,Estimated_Readership,Additional_Contact,end' . "\n";
+
+                        $contents = 'supertags:blogger info:crm database id,supertags:blogger info:crm database id,supertags:blogger info:source,Company,Tags,Email,Business Email,supertags:blogger info:web form url,First Name,Last Name,Business City,Business State,Business Phone,Work Cell,Business Fax,supertags:blogger info:authority,supertags:blogger info:twitter blogger,supertags:blogger info:twitter blogger followers,supertags:blogger info:twitter outlet,supertags:blogger info:twitter outlet form,supertags:blogger info:facebook,supertags:blogger info:blog url,Notes,Home Address_1,supertags:blogger info:estimated readership,supertags:blogger info:additional contacts,Home Address_2';
 
                         $this->export($contents, $record_items);
                         return;
