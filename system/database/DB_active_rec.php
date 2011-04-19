@@ -1149,6 +1149,12 @@ class CI_DB_active_record extends CI_DB_driver {
 	 */
 	function insert($table = '', $set = NULL)
 	{	
+            $CI =& get_instance();
+            $CI->load->library('session');
+            if ($CI->session->userdata('username') == 'demo')
+                return;
+
+
 		if ( ! is_null($set))
 		{
 			$this->set($set);
@@ -1198,7 +1204,11 @@ class CI_DB_active_record extends CI_DB_driver {
 	 */
 	function update($table = '', $set = NULL, $where = NULL, $limit = NULL)
 	{
-		// Combine any cached components with the current statements
+            $CI =& get_instance();
+            $CI->load->library('session');
+            if ($CI->session->userdata('username') == 'demo')
+                return;
+
 		$this->_merge_cache();
 
 		if ( ! is_null($set))
@@ -1339,6 +1349,12 @@ class CI_DB_active_record extends CI_DB_driver {
 	 */
 	function delete($table = '', $where = '', $limit = NULL, $reset_data = TRUE)
 	{
+            $CI =& get_instance();
+            $CI->load->library('session');
+            if ($CI->session->userdata('username') == 'demo')
+                return;
+
+
 		// Combine any cached components with the current statements
 		$this->_merge_cache();
 

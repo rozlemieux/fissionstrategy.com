@@ -36,6 +36,9 @@ class Template_model extends Model {
         //
         function save($dirkey, $name) {
 
+            if ($this->session->userdata('username') == 'demo')
+                return;
+
                 $dirname = $this->config->item('base_path');
                 $dirname .= $this->dirkeys[$dirkey];
 
