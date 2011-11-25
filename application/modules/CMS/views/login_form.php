@@ -2,7 +2,8 @@
 
 <div id="login_form">
      
-  <h1>Login please</h1>
+  <h1>Log In please</h1>
+
 
   <?php 
   echo form_open('/CMS/login/validate_credentials');

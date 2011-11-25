@@ -17,7 +17,7 @@ echo '<div style="clear:both"></div>';
 echo $js_grid;
 
 if (isset($create_button)) {   ?>
-<div class="create_button"><a href="<?php echo $create_button['url']; ?>"><?php echo $create_button['name']; ?></a></div>
+<div class="btn btn-orange"><a href="<?php echo $create_button['url']; ?>"><?php echo $create_button['name']; ?></a></div>
 <?php } ?>
 
 <table id="Grid" style="display:none"></table>
